@@ -9,6 +9,8 @@ import random
 from ..Storage.Database import UserDatabase
 from ..User import User
 
+from .terminal_utils import yes_no_prompt
+
 def parse_args():
     """
     Creates argument menu and returns parsed arguments
@@ -33,24 +35,6 @@ def _get_max_len(iterable: iter, prop: str):
     return max(map(lambda item: len(getattr(item, prop)), iterable))
 
 
-def int_input(msg=""):
-    try:
-        choice = int(input(msg + '\n'))
-    except ValueError:
-        print("Invalid choice")
-        return None
-    return choice
-
-
-def yes_no_prompt(msg: str):
-    while True:
-        answer = str(input(msg + "[y/n]"))
-        if answer.lower() == "y":
-            return True
-        elif answer.lower() == "n":
-            return False
-        else:
-            print("Please enter 'y' or 'n'")
 
 def overwrite_drink(db: UserDatabase, name: str):
     drink = input("Enter your favourite drink:\n")

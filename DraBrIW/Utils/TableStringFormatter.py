@@ -56,10 +56,6 @@ class TableStringFormatter:
         return map(lambda item: str(item), items)
 
 
-def bold(string: str):
-    return f"\033[1m{string}\033[0m"
-
-
 def separator_thick(cell_widths: list, num_cells: int):
     output = "+"
     for index in range(num_cells):
