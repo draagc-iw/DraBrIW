@@ -2,8 +2,8 @@ from ..User import User
 import DraBrIW.Orders
 from DraBrIW.Orders import RoundOrder
 
+from DraBrIW.Utils.terminal_utils import bold
 from DraBrIW.Utils.utils import generate_uid
-
 
 class Round:
     def __init__(self, initiator: User):
@@ -19,7 +19,7 @@ class Round:
         self._orders[person] = order
 
     def __str__(self):
-        output = f"\nYour round\t-\t{self._initiator.name}\n"
+        output = bold(f"\nYour round\t-\t{self._initiator.name}\n")
         output += f"{'▔' * len(output)}\n"
 
         for user, order in self._orders.items():
