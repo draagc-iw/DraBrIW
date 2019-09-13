@@ -1,7 +1,7 @@
 import os, sys
 import yaml
 from DraBrIW.User import User
-from DraBrIW.Utils.TableStringFormatter import TableStringFormatter
+from DraBrIW.Utils import TableStringFormatter
 
 
 class Database:

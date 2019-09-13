@@ -3,7 +3,8 @@ import os, sys
 from DraBrIW.Storage.Database import UserDatabase
 from DraBrIW.User import User
 from DraBrIW.Menu import Menu, MenuItem, MenuManager, SubMenu
-from DraBrIW.Utils.utils import yes_no_prompt, int_input, clear_database, add_user_details
+from DraBrIW.Utils.terminal_utils import yes_no_prompt, int_input
+from DraBrIW.Utils.utils import clear_database, add_user_details
 from DraBrIW.Brews import BREW_CLASSES, DECORATORS
 from DraBrIW.Orders import OrderManager
 
