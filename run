@@ -1,0 +1,3 @@
+#!/bin/bash
+source ./venv/bin/activate
+python3 -m DraBrIW | lolcat -a -d 1 -t
