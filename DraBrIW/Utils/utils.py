@@ -2,6 +2,10 @@ import argparse
 
 import os
 import pickle
+
+from datetime import datetime
+import random
+
 from ..Storage.Database import UserDatabase
 from ..User import User
 
@@ -73,3 +77,6 @@ def clear_database(db: UserDatabase):
         print("Congrats! All data is now lost!")
     else:
         print("Wrong password!\n")
+
+def generate_uid():
+    return datetime.now().microsecond + random.getrandbits(16)

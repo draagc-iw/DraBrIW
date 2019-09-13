@@ -1,5 +1,4 @@
-from DraBrIW.Orders.Round import Round
-from DraBrIW.Orders.Order import Order
+from DraBrIW.Orders import Round, RoundOrder
 from DraBrIW.User import User
 
 from DraBrIW.Brews import Americano, Espresso, DoubleEspresso
@@ -23,7 +22,7 @@ def build_round(round_size: int = None):
     test_round = Round(test_initiator)
     for idx in range(rnd_size):
         usr = TestUser(f"Round User {idx}", Americano())
-        order = Order()
+        order = RoundOrder(test_round)
         order.add_item(Espresso())
         order.add_item(DoubleEspresso())
         order.add_item(Americano())

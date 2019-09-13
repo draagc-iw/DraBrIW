@@ -13,6 +13,10 @@ class Order:
         self._order_items = dict()
 
     @property
+    def uid(self):
+        return self._uid
+
+    @property
     def total(self):
         return reduce(lambda total, dict_item: total + dict_item[0].get_cost() * dict_item[1],
                       self._order_items.items(), 0)  # don't really know how to unpack the dict tuple as lambda param
@@ -32,4 +36,5 @@ class Order:
 
         output += f"Total: {self.total}"
         return f"\n{output}\n"
+
 
