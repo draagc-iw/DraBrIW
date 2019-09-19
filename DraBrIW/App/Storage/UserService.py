@@ -1,6 +1,6 @@
 from ..Utils import SingletonMeta
-import DraBrIW.User as _User
-from DraBrIW.Storage import UserDatabase
+import DraBrIW.App.User as _User
+from DraBrIW.App.Storage import UserDatabase
 
 from ..BaseBrew import Brew
 

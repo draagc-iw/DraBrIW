@@ -1,9 +1,8 @@
 import unittest
-import unittest.mock as mock
 
-from DraBrIW.Storage import UserService, UserDatabase
-from DraBrIW.User import User
-from DraBrIW.Brews import Americano, Espresso
+from DraBrIW.App.Storage import UserService
+from DraBrIW.App.User import User
+from DraBrIW.App.Brews import Americano, Espresso
 
 
 class TestUserService(unittest.TestCase):

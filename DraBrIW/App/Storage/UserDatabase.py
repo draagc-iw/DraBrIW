@@ -1,6 +1,6 @@
-from DraBrIW.Storage.Database import Database
-from DraBrIW.User import User
-from DraBrIW.Utils import TableStringFormatter
+from DraBrIW.App.Storage import Database
+from DraBrIW.App.User import User
+from DraBrIW.App.Utils import TableStringFormatter
 
 class UserDatabase(Database):
     def __init__(self, *args, **kw_args):

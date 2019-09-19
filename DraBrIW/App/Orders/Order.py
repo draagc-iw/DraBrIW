@@ -1,7 +1,6 @@
 from datetime import datetime
 import random
-from DraBrIW.BaseBrew import Brew, BrewDecorator
-
+from DraBrIW.App.BaseBrew import Brew
 
 from functools import reduce
 

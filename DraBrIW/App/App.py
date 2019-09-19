@@ -1,9 +1,7 @@
-from DraBrIW.Storage import UserService, UserDatabase
-from DraBrIW.User import User
-from DraBrIW.TerminalFrontend.Menu import Menu, MenuItem, MenuManager, SubMenu
-from DraBrIW.Utils.terminal_utils import int_input
-from DraBrIW.Brews import BREW_CLASSES, DECORATORS, Americano
-from DraBrIW.Orders import OrderManager, Round
+import sys, os
+from DraBrIW.App.Storage import UserService, UserDatabase
+from DraBrIW.App.Brews import BREW_CLASSES, DECORATORS
+from DraBrIW.App.Orders import OrderManager
 
 import multiprocessing as mp
 from multiprocessing.connection import Connection
@@ -20,7 +18,9 @@ class App(mp.Process):
 
         self.events = {
             'print_db': lambda: str(self.db),
-            'new_single_order': lambda: self.order_manager.new_order()
+            'new_single_order': lambda: self.order_manager.new_order(),
+            'order_single_add': lambda: self.order_manager.add_to_order(),
+            'terminate': lambda: sys.exit(0),
         }
 
     def run(self):

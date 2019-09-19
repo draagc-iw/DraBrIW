@@ -1,8 +1,8 @@
 from .Order import Order
 
-from DraBrIW.BaseBrew import Brew, BrewDecorator
-from DraBrIW.Utils.TableStringFormatter import TableStringFormatter
-from DraBrIW.Utils.terminal_utils import int_input, yes_no_prompt
+from DraBrIW.App.BaseBrew import Brew, BrewDecorator
+from DraBrIW.App.Utils import TableStringFormatter
+from DraBrIW.App.Utils.terminal_utils import int_input, yes_no_prompt
 
 
 class OrderManager:

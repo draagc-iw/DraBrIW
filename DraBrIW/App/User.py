@@ -1,6 +1,5 @@
-import re
-from DraBrIW.BaseBrew import Brew
-from DraBrIW.Utils.utils import generate_uid
+from DraBrIW.App.BaseBrew import Brew
+from DraBrIW.App.Utils.utils import generate_uid
 
 
 class User:

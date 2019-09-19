@@ -1,9 +1,9 @@
 from ..User import User
-from DraBrIW.Orders import Order
-from DraBrIW.Storage import UserService
+from DraBrIW.App.Orders import Order
+from DraBrIW.App.Storage import UserService
 
-from DraBrIW.Utils.terminal_utils import bold
-from DraBrIW.Utils.utils import generate_uid
+from DraBrIW.App.Utils.terminal_utils import bold
+from DraBrIW.App.Utils.utils import generate_uid
 
 
 class Round:

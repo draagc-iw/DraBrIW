@@ -1,5 +1,5 @@
 from enum import Enum
-from DraBrIW.BaseBrew import Brew, BrewDecorator
+from DraBrIW.App.BaseBrew import Brew, BrewDecorator
 
 
 class Ingredients(Enum):
