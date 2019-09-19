@@ -1,8 +1,5 @@
 import os, sys
 import yaml
-from DraBrIW.User import User
-from DraBrIW.Utils import TableStringFormatter
-
 
 class Database:
     def __init__(self, name=None):
@@ -23,6 +20,7 @@ class Database:
                 print(e)
                 sys.exit(os.EX_IOERR)
 
+            self.clean()
 
         else:
             self._db = dict()
@@ -32,40 +30,18 @@ class Database:
 
         try:
             with open(path, "w") as file:
-                # pickle.dump(self._db, file)
                 yaml.dump(self._db, file)
         except IOError as e:
             print("Cannot save database to persistent storage")
             print(e)
 
-
-class UserDatabase(Database):
-    def __init__(self, db_name):
-        super(UserDatabase, self).__init__(db_name)
-
-    def add(self, user: User):
-        self._db[user.name] = user
-        self.save()
-
-    def get(self, name: str):
-        if name in self._db.keys():
-            return self._db[name]
-        else:
-            return None
-
-    def clear(self):
-        self._db = dict()
-        self.save()
-
-    def __str__(self):
-        if len(self._db) is 0:
-            return "Database empty 😢\n"
-        printer = TableStringFormatter()
-        printer.header(["PEOPLE", "DRINKS"])
-        for item in self._db.values():
-            printer.row([item.name, item.fav_drink])
-
-        return printer.get()
+    def clean(self):
+        keys_to_remove = []
+        for key, value in self._db.items():
+            if value is None:
+                keys_to_remove.append(key)
+        for item in keys_to_remove:
+            del self._db[item]
 
 
 class BrewDatabase(Database):

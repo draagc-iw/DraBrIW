@@ -58,12 +58,30 @@ class Milk(BrewDecorator):
         ingredients.append(Ingredients.MILK)
         return ingredients
 
+
+class CustomDrink(Brew):
+    def __init__(self, name, price, ingredients = None):
+        self._name = name
+        self._price = price
+        self._ingredients = ingredients if ingredients is not None else list()
+
+    def get_name(self):
+        return self._name
+
+    def get_ingredients(self):
+        return self._ingredients
+
+    def get_cost(self):
+        return self._price
+
+
 class Sugar(BrewDecorator):
     name = "Sugar"
     cost = 0.2
 
     def __init__(self, decorated_object):
         pass
+
+
 BREW_CLASSES = [Espresso, DoubleEspresso, Americano]
 DECORATORS = [Milk]
-

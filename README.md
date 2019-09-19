@@ -1,3 +1,7 @@
+# DraBrIW
+
+Serve rounds to yours friends (and charge them for the favour!)
+
 ### Make a virtual environment to run your code in nicely
 
 ```
@@ -13,8 +17,17 @@ brew install lolcat
 pip install -r requirements.txt
 ```
 
-### Run the code!
+## Running
 
+You can do the classic
 ```
-./run
+python -m DraBrIW
 ```
+
+or
+
+if you installed lolcat do
+```
+./rounds
+```
+for some MAGIC

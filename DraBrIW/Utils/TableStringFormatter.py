@@ -13,7 +13,7 @@ class TableStringFormatter:
         self._check_len(row_items)
         self._rows.append(list(self._stringify(row_items)))
 
-    def get(self):
+    def get(self) -> str:
         cell_widths = self._calc_cell_widths()
         sep_thick = separator_thick(cell_widths, self._num_columns)
         sep_thin = separator_thin(cell_widths, self._num_columns)

@@ -1,15 +1,15 @@
 import argparse
 
-import os
-import pickle
-
 from datetime import datetime
 import random
 
-from ..Storage.Database import UserDatabase
-from ..User import User
+# from ..User import User
+from DraBrIW.TerminalFrontend.Menu import SubMenu, MenuManager
 
-from .terminal_utils import yes_no_prompt
+
+def get_round_initiator(menu_manager: MenuManager):
+    menu = SubMenu("Select Initiator", menu_manager)
+
 
 def parse_args():
     """
@@ -36,31 +36,7 @@ def _get_max_len(iterable: iter, prop: str):
 
 
 
-def overwrite_drink(db: UserDatabase, name: str):
-    drink = input("Enter your favourite drink:\n")
-    db.add(User(name, drink))
-    print("Your favourite drink has been changed.")
-
-
-def add_user_details(db: UserDatabase):
-    name = input("Enter your name:\n")
-    if db.get(name) is None:
-        drink = input("Enter your favourite drink:\n")
-        db.add(User(name, drink))
-        print(f"New user!{name.capitalize()}'s favourite drink is {drink}")
-    else:
-        prompt_msg = f"{name} already exists. Do you want to change your preference? [y/n]\n"
-        yes_no_prompt(prompt_msg, lambda: overwrite_drink(db, name), lambda: print("No changes made"))
-
-
-def clear_database(db: UserDatabase):
-    ULTRA_SECURE_PASSWORD = "tabsnotspaces"
-    passwd = input("This will erase the entire database. Please enter the password to proceed: \n")
-    if passwd == ULTRA_SECURE_PASSWORD:
-        db.clear()
-        print("Congrats! All data is now lost!")
-    else:
-        print("Wrong password!\n")
-
 def generate_uid():
-    return datetime.now().microsecond + random.getrandbits(16)
+    time_now = datetime.now().strftime("%-H%-M%-S%f")
+    rand = str(random.getrandbits(8))
+    return int(time_now + rand)
