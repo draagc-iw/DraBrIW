@@ -32,7 +32,8 @@ class TerminalHandler(mp.Process):
 
         # Set-up Sub Menus
         submenu_order = SubMenu("Order Menu", self.menu_manager)
-        submenu_order_single = SubMenu("New Order", self.menu_manager, lambda: self.conn.send("new_single_order"))
+        submenu_order_single = SubMenu("New Order", self.menu_manager,
+                                       lambda: conn_send_and_print_response(self.conn, "new_single_order"))
         submenu_order_round = SubMenu("New Round", self.menu_manager, lambda: self.conn.send("new_round_order"))
 
         submenu_order.add_submenu(submenu_order_single)
@@ -53,4 +54,3 @@ class TerminalHandler(mp.Process):
                 self.menu_manager.run_action(choice)
             except ValueError as e:
                 print(e)
-

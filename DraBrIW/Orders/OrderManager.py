@@ -12,8 +12,8 @@ class OrderManager:
         self._decorators = self._index_items(decorators)
 
     def new_order(self):
-        self.print_menu()
         self._order = Order()
+        return self.get_menu_string()
 
     def add_to_order(self):
         drink = self._get_drink()
@@ -38,7 +38,7 @@ class OrderManager:
         return decorator_class(drink)
 
     def _get_drink(self):
-        self.print_menu()
+        # self.get_menu_string()
 
         choice = int_input("Enter your choice of drink")
         if choice not in self._drinks.keys():
@@ -49,7 +49,7 @@ class OrderManager:
     def _index_items(self, items: iter):
         return dict(zip([i for i in range(len(items))], items))
 
-    def print_menu(self):
+    def get_menu_string(self):
         table_formatter = TableStringFormatter()
         table_formatter.header(["No.", "Name", "Price", "Ingredients"])
 
@@ -59,7 +59,7 @@ class OrderManager:
                 ingredients_str += f"{value}x{key.name} "
             table_formatter.row([index, drink.get_name(), drink.get_cost(), ingredients_str])
 
-        print(table_formatter.get())
+        return table_formatter.get()
 
     def print_order(self):
         if self._order is not None:

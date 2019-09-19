@@ -8,6 +8,7 @@ from DraBrIW.Orders import OrderManager, Round
 import multiprocessing as mp
 from multiprocessing.connection import Connection
 
+drinks = list(map(lambda item: item(), BREW_CLASSES))
 
 class App(mp.Process):
     def __init__(self, conn: Connection):
@@ -15,9 +16,11 @@ class App(mp.Process):
         self.conn: Connection = conn
         self.user_service = UserService()
         self.db = UserDatabase("user_db")
+        self.order_manager = OrderManager(drinks, DECORATORS)
 
         self.events = {
-            'print_db': lambda: str(self.db)
+            'print_db': lambda: str(self.db),
+            'new_single_order': lambda: self.order_manager.new_order()
         }
 
     def run(self):
