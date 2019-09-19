@@ -6,7 +6,7 @@ class MenuItem:
         self._msg_help = msg_help
 
     def run_action(self):
-        self._action()
+        return self._action()
 
     @property
     def name(self):
