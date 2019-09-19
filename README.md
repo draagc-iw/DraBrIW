@@ -28,6 +28,6 @@ or
 
 if you installed lolcat do
 ```
-./rounds
+./run
 ```
 for some MAGIC
