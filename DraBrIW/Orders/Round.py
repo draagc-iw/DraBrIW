@@ -1,28 +1,40 @@
 from ..User import User
-import DraBrIW.Orders
-from DraBrIW.Orders import RoundOrder
+from DraBrIW.Orders import Order
+from DraBrIW.Storage import UserService
 
 from DraBrIW.Utils.terminal_utils import bold
 from DraBrIW.Utils.utils import generate_uid
+
 
 class Round:
     def __init__(self, initiator: User):
         self._initiator = initiator
         self._orders = dict()
         self._uid = generate_uid()
+        self.user_service = UserService()
 
     @property
     def uid(self):
         return self._uid
 
-    def add(self, person: User, order: RoundOrder):
-        self._orders[person] = order
+    @property
+    def orders(self):
+        return self._orders
+
+    def new_round(self):
+        self._initiator = None
+        self._orders = dict()
+        self._uid = generate_uid()
+
+    def add(self, person: User, order: Order):
+        self._orders[person.uid] = order
 
     def __str__(self):
-        output = bold(f"\nYour round\t-\t{self._initiator.name}\n")
+        initiator_name = "No initiator" if self._initiator is None else self._initiator.name
+        output = bold(f"\nYour round\t-\t{initiator_name}\n")
         output += f"{'▔' * len(output)}\n"
 
-        for user, order in self._orders.items():
-            output += f"{user.name}\n\t{order}\n\n"
+        for uid, order in self._orders.items():
+            output += f"{self.user_service.get_with_uid(uid).name}\n\t{order}\n\n"
 
         return output

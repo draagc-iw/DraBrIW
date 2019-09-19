@@ -1,8 +1,7 @@
 from datetime import datetime
 import random
 from DraBrIW.BaseBrew import Brew, BrewDecorator
-from DraBrIW.Utils.TableStringFormatter import TableStringFormatter
-from DraBrIW.Utils.terminal_utils import int_input, yes_no_prompt
+
 
 from functools import reduce
 
