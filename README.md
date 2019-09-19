@@ -22,8 +22,8 @@ python -m DraBrIW
 
 or
 
-install lolcat and do
+install lolcat using your system package manager and do
 ```
-./rounds
+./run
 ```
 for some MAGIC
