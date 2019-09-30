@@ -1,5 +1,5 @@
 from flask import Flask, render_template, escape, url_for, redirect
-from DraBrIW.App.Storage import RDS_UserService
+from DraBrIW.App.Storage import RDS_UserService, DrinkService
 
 flask_app = Flask(__name__)
 
@@ -19,6 +19,12 @@ def app():
 @flask_app.route('/app/people')
 def people():
     return render_template("app/people.html", people=RDS_UserService().get_all())
+
+
+@flask_app.route('/app/drinks')
+def drinks():
+    print(DrinkService().get_all())
+    return render_template("app/drinks.html", drinks=DrinkService().get_all())
 
 
 @flask_app.route('/user/<id>')

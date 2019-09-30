@@ -1,0 +1,13 @@
+{% extends "app/base_app.html" %}
+{% block app_content %}
+    <div class="block-list-container scrollable">
+        <ul id="people-list" class="block-list">
+            {% for drink in drinks %}
+                <li class="block-list-item">
+                    <img class="block-list-item__img" src="{{ url_for('static', filename='img/coffee.svg') }}">
+                    <div class="block-list-item__title">{{ drink.get_name() | capitalize }}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

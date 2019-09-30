@@ -29,7 +29,7 @@ a:hover{
   color: white;
 }
 
-.people-container {
+.block-list-container {
   display: inline-block;
   float: right;
   background: #FDFDFD;
@@ -38,15 +38,15 @@ a:hover{
 
 }
 
-.people-list {
+.block-list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
 }
 
-.people-item {
-  width: 25%;
+.block-list-item {
+  /*width: 25%;*/
   padding: 25px 0;
   margin: 20px;
   background: #5C5C5C;
@@ -58,19 +58,20 @@ a:hover{
 
 }
 
-.people-item__first-name {
+.block-list-item__title {
   font-size: 1.8em;
   font-weight: 500;
   margin-bottom: 2px;
 }
 
-.people-item__last-name {
+.block-list-item__subtitle {
   font-size: 2em;
   font-weight: 700;
   margin-bottom: 5px;
 }
 
-.people-item__img {
+.block-list-item__img {
+  max-width: 35%;
   margin-bottom: 15px;
 }
 
