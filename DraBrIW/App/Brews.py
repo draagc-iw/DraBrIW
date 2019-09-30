@@ -1,8 +1,8 @@
-from enum import Enum
-from DraBrIW.App.BaseBrew import Brew, BrewDecorator
+import abc
+import enum
 
 
-class Ingredients(Enum):
+class Ingredients(enum.Enum):
     WATER = 0
     ESPRESSO = 1
     MILK_FOAM = 2
@@ -10,57 +10,52 @@ class Ingredients(Enum):
     CHOCOLATE_SYRUP = 4
 
 
-class Espresso(Brew):
+class Brew(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
     def get_name(self):
-        return "Espresso (Short Black)"
+        pass
 
+    @abc.abstractmethod
+    def get_cost(self):
+        pass
+
+    @abc.abstractmethod
     def get_ingredients(self):
-        return {Ingredients.ESPRESSO: 1}
+        pass
+
+    def __str__(self):
+        return self.get_name()
+
+
+class BrewDecorator(Brew, metaclass=abc.ABCMeta):
+    def __init__(self, decorated_object: Brew):
+        self._decorated_obj = decorated_object
+        self._name: str = "BrewDecorator"
+        self._cost = 0
 
     def get_cost(self):
-        return 0
-
-
-class DoubleEspresso(Brew):
-    def get_name(self):
-        return "Double Espresso (Doppio)"
+        return self._decorated_obj.get_cost() + self._cost
 
     def get_ingredients(self):
-        return {Ingredients.ESPRESSO: 2}
-
-    def get_cost(self):
-        return 0
-
-
-class Americano(Brew):
-    def get_cost(self):
-        """FREE - It's InfinityWorks!"""
-        return 0
-
-    def get_ingredients(self):
-        return {Ingredients.WATER: 1, Ingredients.ESPRESSO: 1}
+        return self._decorated_obj.get_ingredients()
 
     def get_name(self):
-        return "Americano"
+        drink_name = self._decorated_obj.get_name()
+        if drink_name.find("- with -") == -1:
+            drink_name += " - with - "
+        else:
+            drink_name += ", "
+        drink_name += self._name
+
+        return drink_name
+
+    def __str__(self):
+        return self.get_name()
 
 
-class Milk(BrewDecorator):
-    name = "Milk"
-    cost = 0.1
-
-    def __init__(self, decorated_object):
-        super(Milk, self).__init__(decorated_object)
-        self._name = Milk.name
-        self._cost = Milk.cost
-
-    def get_ingredients(self):
-        ingredients: list = self._decorated_obj.get_ingredients()
-        ingredients.append(Ingredients.MILK)
-        return ingredients
-
-
-class CustomDrink(Brew):
-    def __init__(self, name, price, ingredients = None):
+class Drink(Brew):
+    def __init__(self, name, price, id: int = None, ingredients=None):
+        self.id = id
         self._name = name
         self._price = price
         self._ingredients = ingredients if ingredients is not None else list()
@@ -73,15 +68,3 @@ class CustomDrink(Brew):
 
     def get_cost(self):
         return self._price
-
-
-class Sugar(BrewDecorator):
-    name = "Sugar"
-    cost = 0.2
-
-    def __init__(self, decorated_object):
-        pass
-
-
-BREW_CLASSES = [Espresso, DoubleEspresso, Americano]
-DECORATORS = [Milk]

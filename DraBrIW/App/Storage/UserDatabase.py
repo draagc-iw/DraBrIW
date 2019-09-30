@@ -11,7 +11,7 @@ class UserDatabase(Database):
         self.save()
 
     def get_all(self) -> iter:
-        return self._db.values()
+        return list(self._db.values())
 
     def get(self, uid: int) -> User:
         if uid in self._db.keys():

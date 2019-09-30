@@ -1,0 +1,14 @@
+{% extends "app/base_app.html" %}
+{% block app_content %}
+    <div id="people-container" class="people-container scrollable">
+        <ul id="people-list" class="people-list">
+            {% for person in people %}
+                <li class="people-item">
+                    <img class="people-item__img" src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
+                    <div class="people-item__first-name">{{ person.first_name | capitalize}}</div>
+                    <div class="people-item__last-name">{{ person.last_name | capitalize}}</div>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,96 @@
+@media only screen and (max-width: 800px) {
+  body {
+    font-size: 0.5em;
+  }
+}
+
+a{
+  color: inherit;
+}
+
+a:hover{
+  color: inherit;
+}
+
+.hidden{
+  display: none;
+}
+
+.app-content {
+  width: 80%;
+  height: 100%;
+  float: right;
+}
+
+.sidebar {
+  display: inline-block;
+  height: 100%;
+  width: 20%;
+  color: white;
+}
+
+.people-container {
+  display: inline-block;
+  float: right;
+  background: #FDFDFD;
+  width: 100%;
+  height: 100%;
+
+}
+
+.people-list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.people-item {
+  width: 25%;
+  padding: 25px 0;
+  margin: 20px;
+  background: #5C5C5C;
+  color: white;
+  text-align: center;
+  flex-grow: 1;
+  flex-basis: 20%;
+  max-width: 25%;
+
+}
+
+.people-item__first-name {
+  font-size: 1.8em;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+
+.people-item__last-name {
+  font-size: 2em;
+  font-weight: 700;
+  margin-bottom: 5px;
+}
+
+.people-item__img {
+  margin-bottom: 15px;
+}
+
+.h-100 {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.vertical-menu{
+  list-style: none;
+  text-align: center;
+  padding: 0;
+}
+
+.vertical-menu__item{
+  font-size: 2em;
+  cursor: pointer;
+}
+
+.vertical-menu__item:hover{
+  text-decoration: underline;
+}

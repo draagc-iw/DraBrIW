@@ -1,6 +1,6 @@
 from .Order import Order
 
-from DraBrIW.App.BaseBrew import Brew, BrewDecorator
+from DraBrIW.App.Brews import Brew, BrewDecorator
 from DraBrIW.App.Utils import TableStringFormatter
 from DraBrIW.App.Utils.terminal_utils import int_input, yes_no_prompt
 

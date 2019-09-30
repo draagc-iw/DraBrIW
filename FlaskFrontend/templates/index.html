@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <div id="particles" class="particles">
+    </div>
+    <section id="title-section" class="section section--light">
+        <div class="section__content">
+            <div class="title-section__main">
+                <h1 class="title">
+                    Serve rounds to yours friends
+                </h1>
+                <h4 class="subtitle">
+                    and charge them for the favour!
+                </h4>
+            </div>
+            <p>
+                DraBrIW is the next-gen app that allows you to make custom rounds for your friends and frenemies, with
+                the
+                ability
+                to store their preferance for quick brew-making.
+            </p>
+        </div>
+
+    </section>
+    <section class="section gallery">
+        <div class="section__content">
+            <div class="section__title">
+                <h3>Gallery</h3>
+                <div class="separator separator--light"></div>
+            </div>
+            <div class="center">
+                <img alt="Screenshot of the app" src="{{ url_for('static', filename='img/app-image.png') }}">
+            </div>
+        </div>
+    </section>
+    <section class="section section--light">
+        <div class="section__content">
+            <div class="section__title">
+                <h3>Features</h3>
+                <div class="separator"></div>
+            </div>
+            <ul>
+                <li>It has a menu</li>
+                <li>You can add drinks</li>
+                <li>You can add people</li>
+                <li>You can set people's preferred drinks</li>
+                <br>
+                <li>Lots of stuff not working right now rip 😅</li>
+            </ul>
+
+        </div>
+    </section>
+{% endblock %}

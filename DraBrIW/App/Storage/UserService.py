@@ -2,7 +2,7 @@ from ..Utils import SingletonMeta
 import DraBrIW.App.User as _User
 from DraBrIW.App.Storage import UserDatabase
 
-from ..BaseBrew import Brew
+from ..Brews import Brew
 
 
 class UserService(metaclass=SingletonMeta):
@@ -14,12 +14,19 @@ class UserService(metaclass=SingletonMeta):
             raise ValueError("User already exists")
         self._db.add(user)
 
+    def add_multiple(self, users: iter):
+        for user in users:
+            self._db.add(user)
+
     def get_with_uid(self, uid) -> _User.User:
         return self._db.get(uid)
 
     def get_with_name(self, name) -> list:
         results = [user for user in self._db.get_all() if user.name == name]
         return results
+
+    def get_all(self):
+        return self._db.get_all()
 
     def delete(self, user: _User.User):
         self._db.delete(user.uid)

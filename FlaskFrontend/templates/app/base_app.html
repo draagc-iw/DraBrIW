@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="sidebar">
+        {% include "app/sidebar.html" %}
+    </div>
+    <div class="app-content">
+        {% block app_content %}
+        {% endblock %}
+    </div>
+{% endblock %}
