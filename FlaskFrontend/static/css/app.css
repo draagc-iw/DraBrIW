@@ -20,6 +20,8 @@ a:hover{
   width: 80%;
   height: 100%;
   float: right;
+  background: #F6F6F6;
+
 }
 
 .sidebar {
@@ -32,36 +34,45 @@ a:hover{
 .block-list-container {
   display: inline-block;
   float: right;
-  background: #FDFDFD;
   width: 100%;
   height: 100%;
 
 }
 
 .block-list {
+  height: 100%;
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   padding: 0;
+
 }
 
 .block-list-item {
-  /*width: 25%;*/
+  height: auto;
+  max-height: 280px;
   padding: 25px 0;
   margin: 20px;
-  background: #5C5C5C;
-  color: white;
+  background: white;
+  color: #333435;
   text-align: center;
-  flex-grow: 1;
-  flex-basis: 20%;
-  max-width: 25%;
 
+  flex-basis: 20%;
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.block-list-item:hover{
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .block-list-item__title {
   font-size: 1.8em;
   font-weight: 500;
-  margin-bottom: 2px;
+  margin-bottom: 20px;
 }
 
 .block-list-item__subtitle {
@@ -94,4 +105,22 @@ a:hover{
 
 .vertical-menu__item:hover{
   text-decoration: underline;
+}
+
+.select-user-list__item{
+  margin: 10px 0px;
+}
+
+.select-user-list__item:hover{
+  background: whitesmoke;
+  color:black;
+  fill:black;
+}
+
+.select-user-list__item img{
+  width: 10px;
+}
+
+.select-user-list__item *{
+  display: inline-block;
 }

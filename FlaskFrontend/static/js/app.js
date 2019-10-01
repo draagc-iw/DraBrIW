@@ -1,46 +1,47 @@
-const AppPages = {
-  people: "#people-container",
-  drinks: "#drinks-container"
-};
+function initAdders() {
+    const elAdd = document.querySelector('.list-add');
+    if (elAdd) {
+        elAdd.addEventListener('click', () => {
+            const elVisible = document.querySelector('.list-add>div:not(.hidden)');
+            const elHidden = elAdd.querySelector('.list-add>div.hidden');
+            elVisible.classList.add('hidden');
+            elHidden.classList.remove('hidden');
+        });
 
-function get_people() {
-  const peopleReq = new XMLHttpRequest();
-  const elementPersonList = document.querySelector('#people-list');
-  const template = document.querySelector('#people-item');
+        elAdd.querySelectorAll('.to-add').forEach((element) => {
+                element.addEventListener('click', (ev) => {
+                    const apiPath = ev.target.parentElement.getAttribute('data-path');
+                    const addId = ev.target.parentElement.getAttribute('data-add-id');
 
-  peopleReq.addEventListener('load', (e) => {
-    const people = JSON.parse(peopleReq.response);
-    people.forEach((person) => {
-      const liElement = document.importNode(template.content, true);
-      const elementName = liElement.querySelector('.people-item__first-name');
-      const elementDrink = liElement.querySelector('.people-item__last-name');
+                    const req = new XMLHttpRequest();
+                    req.addEventListener('load', () => {
+                        if (req.status === 200) location.reload();
+                        else alert(`Error ${req.statusText}`);
 
-      elementName.innerHTML = person['first_name'];
-      elementDrink.innerHTML = person['last_name'];
+                    });
+                    req.addEventListener('error', (err) => alert(`Error: ${err}`));
+                    req.open("POST", apiPath);
+                    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+                    req.send(JSON.stringify({id: addId}));
+                });
+            }
+        );
+    }
 
-      elementPersonList.appendChild(liElement);
-    })
-  });
-  peopleReq.open('GET', 'http://10.0.1.72:8080/users');
-  peopleReq.send()
 }
 
-function navigate(page){
-  Object.values(AppPages).forEach((value) => document.querySelector(value).classList.add('hidden'));
-  AppPages[page].classList.remove('hidden');
-}
-
-function init_menu() {
-  document.querySelector(".vertical-menu").children.forEach((menuItem) => {
-    menuItem.addEventListener('click', () => navigate(menuItem.att))
-  });
-  document.querySelector("#menu-item__people").addEventListener('click', () => navigate(AppPages.people));
-  document.querySelector("#menu-item__people").addEventListener('click', () => na)
+function initBlockLinks() {
+    document.querySelectorAll('.block-list-item').forEach((element) => {
+        const href = element.getAttribute('data-href');
+        if (href) element.addEventListener('click', () => {
+            window.location.href = href
+        });
+    });
 }
 
 function init() {
-  get_people();
-  init_menu();
+    initAdders();
+    initBlockLinks();
 }
 
 init();

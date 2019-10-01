@@ -20,12 +20,12 @@ class RDS_UserService(UserService):
         pass
 
     def get_with_uid(self, uid) -> User:
-        get_uid_q = """SELECT
-                            p.uid, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
+        get_uid_q = f"""SELECT
+                            p.id, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
                         FROM person AS p
                         LEFT JOIN drinks as d
                         ON p.id_fav_drink = d.id
-                        WHERE p.uid = {}""".format(uid)
+                        WHERE p.id = {uid}"""
 
         cursor = self._db.cursor_named
         cursor.execute(get_uid_q)
@@ -33,7 +33,7 @@ class RDS_UserService(UserService):
 
     def get_all(self) -> list:
         get_all_q = f"""SELECT
-                            p.uid, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
+                            p.id, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
                         FROM person AS p
                         LEFT JOIN drinks as d
                         ON p.id_fav_drink = d.id"""

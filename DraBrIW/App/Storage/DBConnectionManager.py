@@ -17,6 +17,11 @@ class DBConnectionManager(metaclass=SingletonMeta):
         self._cnx: mysql.connector.MySQLConnection = None
         self.connect(SQL_connection_config)
 
+    def check_connection(self):
+        if not self._cnx.is_connected():
+            self.connect(SQL_connection_config)
+
+
     def connect(self, connection_config):
         try:
             self._cnx = mysql.connector.connect(**connection_config)
@@ -33,8 +38,11 @@ class DBConnectionManager(metaclass=SingletonMeta):
 
     @property
     def cursor_named(self) -> mysql.connector.connection.CursorBase:
+        self.check_connection()
         return self._cnx.cursor(named_tuple=True)
 
     @property
     def cursor_prepared(self) -> mysql.connector.connection.CursorBase:
+        self.check_connection()
         return self._cnx.cursor(prepared=True)
+

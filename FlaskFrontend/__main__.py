@@ -1,10 +1,7 @@
-from flask import Flask, render_template, escape, url_for, redirect
-from DraBrIW.App.Storage import RDS_UserService, DrinkService
+from flask import Flask, render_template, escape, url_for, redirect, request, jsonify
+from DraBrIW.App.Storage import RDS_UserService, DrinkService, RoundService
 
 flask_app = Flask(__name__)
-
-
-# flask_app.config(extra_files=['./static/css/app.css'])
 
 @flask_app.route('/')
 def index():
@@ -23,8 +20,22 @@ def people():
 
 @flask_app.route('/app/drinks')
 def drinks():
-    print(DrinkService().get_all())
     return render_template("app/drinks.html", drinks=DrinkService().get_all())
+
+
+@flask_app.route('/app/rounds', methods=["GET", "POST"])
+def rounds():
+    if request.method == "GET":
+        return render_template("app/rounds.html", rounds=RoundService().get_all(), people=RDS_UserService().get_all())
+    elif request.method == "POST":
+        initiator_id = int(request.json["id"])
+        RoundService().new_round(RDS_UserService().get_with_uid(initiator_id))
+        return jsonify({"status": "ok"})
+
+
+@flask_app.route('/app/rounds/<int:id>')
+def round_id(id: int):
+    return render_template("app/round_details.html", round=RoundService().get_with_id(id))
 
 
 @flask_app.route('/user/<id>')
