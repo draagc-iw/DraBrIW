@@ -60,8 +60,8 @@ WHERE r.id = {id};
         """
         cursor = self._db.cursor_named
         cursor.execute(get_id_q)
-        res = cursor.fetchall()
-        return RoundMapper.from_db(res)
+        res = RoundMapper.from_db(cursor.fetchall())
+        return res[0] if len(res) > 0 else None
 
     def get_all(self):
         get_all_q = """

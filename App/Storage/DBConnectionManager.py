@@ -3,23 +3,14 @@ import os, sys
 from mysql.connector import errorcode
 import App.Utils as Utils
 from App.Storage.db_utils import get_db_pass_from_keychain
-
 SQL_connection_config = {
-    'host': 'database-academy-test.crtvvzmhs8i6.eu-west-2.rds.amazonaws.com',
-    'user': 'dragos',
-    'database': 'dragos'
+    'host': os.environ["MYSQL_HOST"],
+    'user': os.environ["MYSQL_USER"],
+    'database': os.environ["MYSQL_DB"],
+    'password': os.environ.get("MYSQL_PASS") if os.environ.get("MYSQL_PASS") is not None else get_db_pass_from_keychain(),
+    'port': os.environ.get("MYSQL_PORT") if os.environ.get("MYSQL_PORT") is not None else 3306,
 }
 
-try:
-    password = get_db_pass_from_keychain()
-except FileNotFoundError:
-    try:
-        password = os.environ["DB_PASS"]
-    except KeyError:
-        print("Cannot find password for db. Exiting")
-        sys.exit(1)
-
-SQL_connection_config['password'] = password.strip("\n ")
 
 class DBConnectionManager(metaclass=Utils.SingletonMeta):
     def __init__(self):
@@ -30,17 +21,19 @@ class DBConnectionManager(metaclass=Utils.SingletonMeta):
         if not self._cnx.is_connected():
             self.connect(SQL_connection_config)
 
-
     def connect(self, connection_config):
         try:
             self._cnx = mysql.connector.connect(**connection_config)
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-                print("Something is wrong with your user name or password")
+                print("Invalid database credentials")
             elif err.errno == errorcode.ER_BAD_DB_ERROR:
                 print("Database does not exist")
-            else:
-                print(err)
+                
+            print(err, file=sys.stderr, flush=True)
+            sys.exit(err.errno)
+        else:
+            print("Connection to database successful")
 
     def commit(self):
         self._cnx.commit()
@@ -54,4 +47,3 @@ class DBConnectionManager(metaclass=Utils.SingletonMeta):
     def cursor_prepared(self) -> mysql.connector.connection.CursorBase:
         self.check_connection()
         return self._cnx.cursor(prepared=True)
-
