@@ -1,1 +1,2 @@
-from .__main__ import flask_app
+from flask import Flask
+app = Flask(__name__)

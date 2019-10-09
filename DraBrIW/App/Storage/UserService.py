@@ -1,44 +1,52 @@
-from ..Utils import SingletonMeta
-import DraBrIW.App.User as _User
-from DraBrIW.App.Storage import UserDatabase
+from ZDraBrIW.App.Storage import DBConnectionManager
+from ZDraBrIW.App.User import User
+from ZDraBrIW.App.Brews import Brew
+from ZDraBrIW.App.Utils import UserMapper
 
-from ..Brews import Brew
 
+class UserService:
+    def __init__(self):
+        self._db = DBConnectionManager()
 
-class UserService(metaclass=SingletonMeta):
-    def __init__(self, database: UserDatabase = None):
-        self._db: UserDatabase = database if database is not None else UserDatabase('user_db')
-
-    def add(self, user: _User.User):
-        if self._db.get(user.uid) is not None:
-            raise ValueError("User already exists")
-        self._db.add(user)
-
-    def add_multiple(self, users: iter):
-        for user in users:
-            self._db.add(user)
-
-    def get_with_uid(self, uid) -> _User.User:
-        return self._db.get(uid)
+    def add(self, user: User):
+        add_query = f"""INSERT INTO person (first_name, last_name, id_fav_drink) 
+               VALUES (%s, %s, %s);"""
+        cursor = self._db.cursor_prepared
+        cursor.execute(add_query, UserMapper.to_db(user))
+        self._db.commit()
 
     def get_with_name(self, name) -> list:
-        results = [user for user in self._db.get_all() if user.name == name]
-        return results
+        pass
 
-    def get_all(self):
-        return self._db.get_all()
+    def get_with_uid(self, uid) -> User:
+        get_uid_q = f"""SELECT
+                            p.id, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
+                        FROM person AS p
+                        LEFT JOIN drinks as d
+                        ON p.id_fav_drink = d.id
+                        WHERE p.id = {uid}"""
 
-    def delete(self, user: _User.User):
-        self._db.delete(user.uid)
+        cursor = self._db.cursor_named
+        cursor.execute(get_uid_q)
+        return UserMapper.from_db(cursor.fetchone())
 
-    def change_name(self, uid, new_name: str):
-        user = self._db.get(uid)
-        user.name = new_name
-        self._db.add(user)
+    def get_all(self) -> list:
+        get_all_q = f"""SELECT
+                            p.id, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
+                        FROM person AS p
+                        LEFT JOIN drinks as d
+                        ON p.id_fav_drink = d.id"""
+
+        cursor = self._db.cursor_named
+        cursor.execute(get_all_q)
+        return list(map(lambda row: UserMapper.from_db(row), cursor.fetchall()))
 
     def change_drink(self, uid, new_drink: Brew):
-        user = self._db.get(uid)
-        user.fav_drink = new_drink
-        self._db.add(user)
+        pass
 
+    def change_name(self, uid, new_name: str):
+        pass
+
+    def delete(self, user: User):
+        pass
 

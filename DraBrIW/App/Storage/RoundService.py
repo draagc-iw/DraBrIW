@@ -1,9 +1,9 @@
-from DraBrIW.App.Storage import DBConnectionManager
-from DraBrIW.App.User import User
-from DraBrIW.App.Orders import Round
-from DraBrIW.App.Brews import Drink
+from ZDraBrIW.App.Storage import DBConnectionManager
+from ZDraBrIW.App.User import User
+from ZDraBrIW.App.Orders import Round
+from ZDraBrIW.App.Brews import Drink
 
-from DraBrIW.App.Utils.Mappers import RoundMapper
+from ZDraBrIW.App.Utils.Mappers import RoundMapper
 
 
 class RoundService:
@@ -19,13 +19,13 @@ class RoundService:
         cursor.execute(create_q, (initiator.uid,))
         self._db.commit()
 
-    def add_person(self, round: Round, person: User, drink: Drink):
+    def add_person(self, round_id, person_id, drink_id):
         add_q = """
         INSERT INTO rounds_users(round_id, person_id, drinks_id)
         VALUES (?, ?, ?);
         """
         cursor = self._db.cursor_prepared
-        cursor.execute(add_q, (round.uid, person.uid, drink.id))
+        cursor.execute(add_q, (round_id, person_id, drink_id))
         self._db.commit()
 
     def close_round(self, round: Round):
@@ -43,6 +43,7 @@ class RoundService:
                p.id         AS initiator_id,
                p.first_name AS initiator_first_name,
                p.last_name  AS initiator_last_name,
+               ru_link.person_id AS person_id,
                ru_link.first_name AS person_first_name,
                ru_link.last_name AS person_last_name,
                ru_link.drink_name AS drink_name,
@@ -50,7 +51,7 @@ class RoundService:
         FROM rounds r
                  INNER JOIN person p ON r.initiator_id = p.id
                  LEFT JOIN
-             (SELECT ru.round_id, p2.first_name, p2.last_name, d.name AS drink_name, d.id AS drink_id
+             (SELECT ru.round_id, p2.first_name, p2.last_name, p2.id AS person_id, d.name AS drink_name, d.id AS drink_id
               FROM rounds_users AS ru
                        INNER JOIN person p2 on ru.person_id = p2.id
                        INNER JOIN drinks d on ru.drinks_id = d.id)
@@ -60,7 +61,9 @@ class RoundService:
         """
         cursor = self._db.cursor_named
         cursor.execute(get_id_q)
-        return RoundMapper.from_db(cursor.fetchall())
+        res = cursor.fetchall()
+        print(res)
+        return RoundMapper.from_db(res)
 
     def get_all(self):
         get_all_q = """
@@ -68,6 +71,7 @@ class RoundService:
                p.id         AS initiator_id,
                p.first_name AS initiator_first_name,
                p.last_name  AS initiator_last_name,
+               ru_link.person_id AS person_id,
                ru_link.first_name AS person_first_name,
                ru_link.last_name AS person_last_name,
                ru_link.drink_name AS drink_name,
@@ -75,7 +79,7 @@ class RoundService:
         FROM rounds r
                  INNER JOIN person p ON r.initiator_id = p.id
                  LEFT JOIN
-             (SELECT ru.round_id, p2.first_name, p2.last_name, d.name AS drink_name, d.id AS drink_id
+             (SELECT ru.round_id, p2.first_name, p2.last_name, p2.id AS person_id, d.name AS drink_name, d.id AS drink_id
               FROM rounds_users AS ru
                        INNER JOIN person p2 on ru.person_id = p2.id
                        INNER JOIN drinks d on ru.drinks_id = d.id)
@@ -86,6 +90,3 @@ class RoundService:
         cursor = self._db.cursor_named
         cursor.execute(get_all_q)
         return RoundMapper.from_db(cursor.fetchall())
-
-
-

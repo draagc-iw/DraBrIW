@@ -1,7 +1,6 @@
 from ..User import User
-from DraBrIW.App.Orders import Order
-from DraBrIW.App.Utils.terminal_utils import bold
-from DraBrIW.App.Utils.utils import generate_uid
+from ZDraBrIW.App.Orders import Order
+from ZDraBrIW.App.Utils.terminal_utils import bold
 
 
 class Round:
@@ -19,7 +18,14 @@ class Round:
         return self._orders
 
     def add(self, person: User, order: Order):
-        self._orders[person.uid] = order
+        # print(object.__str__())
+        if person.uid in self._orders.keys():
+            for drink_id in order.items.keys():
+                self._orders[person.uid].add_item(drink_id)
+        else:
+            self._orders[person.uid] = order
+        print(self._orders)
+
 
     def __str__(self):
         initiator_name = "No initiator" if self.initiator is None else self.initiator.full_name
@@ -27,6 +33,6 @@ class Round:
         output += f"{'▔' * len(output)}\n"
 
         # for uid, order in self._orders.items():
-        #     output += f"{self.user_service.get_with_uid(uid).name}\n\t{order}\n\n"
+        #     output += f"{UserService().get_with_uid(uid).full_name}\n\t{order}\n\n"
 
         return output

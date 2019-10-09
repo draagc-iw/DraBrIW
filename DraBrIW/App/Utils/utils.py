@@ -4,7 +4,7 @@ from datetime import datetime
 import random
 
 # from ..User import User
-from DraBrIW.TerminalFrontend.Menu import SubMenu, MenuManager
+from ZDraBrIW.TerminalFrontend.Menu import SubMenu, MenuManager
 
 
 def get_round_initiator(menu_manager: MenuManager):

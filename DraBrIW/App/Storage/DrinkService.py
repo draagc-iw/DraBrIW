@@ -1,7 +1,7 @@
-from DraBrIW.App.Utils import SingletonMeta
-from DraBrIW.App.Storage import DBConnectionManager
-from DraBrIW.App.Brews import Drink
-from DraBrIW.App.Utils import DrinkMapper
+from ZDraBrIW.App.Utils import SingletonMeta
+from ZDraBrIW.App.Storage import DBConnectionManager
+from ZDraBrIW.App.Brews import Drink
+from ZDraBrIW.App.Utils import DrinkMapper
 
 
 class DrinkService(metaclass=SingletonMeta):
@@ -14,15 +14,16 @@ class DrinkService(metaclass=SingletonMeta):
         cursor = self._db.cursor_prepared
         cursor.execute(add_query, (DrinkMapper.to_db(drink),))
 
+
     def get(self, uid: int):
-        get_uid_q = """ SELECT 
+        get_uid_q = f""" SELECT 
                             id, name
                         FROM drinks
-                        WHERE id = ?;
+                        WHERE id = {uid};
                     """
 
         cursor = self._db.cursor_named
-        cursor.execute(get_uid_q, uid)
+        cursor.execute(get_uid_q)
         return DrinkMapper.from_db(cursor.fetchone())
 
     def get_all(self):

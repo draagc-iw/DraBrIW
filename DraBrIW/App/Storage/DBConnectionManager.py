@@ -1,8 +1,7 @@
 import mysql
 from mysql.connector import errorcode
-
-from DraBrIW.App.Utils import SingletonMeta
-from DraBrIW.App.Storage.db_utils import get_db_pass_from_keychain
+import ZDraBrIW.App.Utils as Utils
+from ZDraBrIW.App.Storage.db_utils import get_db_pass_from_keychain
 
 SQL_connection_config = {
     'host': 'database-academy-test.crtvvzmhs8i6.eu-west-2.rds.amazonaws.com',
@@ -12,7 +11,7 @@ SQL_connection_config = {
 }
 
 
-class DBConnectionManager(metaclass=SingletonMeta):
+class DBConnectionManager(metaclass=Utils.SingletonMeta):
     def __init__(self):
         self._cnx: mysql.connector.MySQLConnection = None
         self.connect(SQL_connection_config)

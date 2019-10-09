@@ -1,8 +1,8 @@
 from .jsonders import UserEncoder, UserDecoder, DrinkDecoder
-from DraBrIW.App.Storage import DrinkService, RDS_UserService
+from ZDraBrIW.App.Storage import DrinkService, UserService
 import json
 
-us = RDS_UserService()
+us = UserService()
 ds = DrinkService()
 
 

@@ -1,7 +1,7 @@
 import unittest
-from DraBrIW.App.Brews import Americano
+from ZDraBrIW.App.Brews import Americano
 
-from DraBrIW.App.User import User
+from ZDraBrIW.App.User import User
 
 
 class TestUser(unittest.TestCase):

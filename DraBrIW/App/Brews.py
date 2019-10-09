@@ -68,3 +68,6 @@ class Drink(Brew):
 
     def get_cost(self):
         return self._price
+
+    def __str__(self):
+        return f"#{self.id} - {self.get_name()}"
