@@ -16,6 +16,7 @@ def base_app():
 
 @app.route('/app/people', methods=["GET", "POST"])
 def people():
+    print(request.endpoint)
     if request.method == "GET":
         return render_template("app/people.html", people=UserService().get_all(), drinks=DrinkService().get_all())
     elif request.method == "POST":
