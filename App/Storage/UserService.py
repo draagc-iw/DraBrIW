@@ -41,8 +41,16 @@ class UserService:
         cursor.execute(get_all_q)
         return list(map(lambda row: UserMapper.from_db(row), cursor.fetchall()))
 
-    def change_drink(self, uid, new_drink: Brew):
-        pass
+    def change_drink(self, uid, new_drink_id):
+        print(f"Change drink for {uid} to {new_drink_id}")
+        update_drink_q = f""" UPDATE person
+        SET id_fav_drink = ?
+        WHERE id = ?
+        """
+        cursor = self._db.cursor_prepared
+        cursor.execute(update_drink_q, (new_drink_id, uid))
+        self._db.commit()
+
 
     def change_name(self, uid, new_name: str):
         pass
