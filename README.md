@@ -1,7 +1,6 @@
 # DraBrIW
 
-Serve rounds to yours friends (and charge them for the favour!)
-
+Drink round manager application. Pretty self-explanatory.
 ## Dependencies
 
 You can find them in requirements.txt
@@ -14,6 +13,10 @@ Install dependencies with
 ```shell script
 pip install -r requirements.txt
 ```
+
+##Prerequisites
+
+A MySQL 5.7+ database with the correct schema. An initializer SQL script is provided in `drabriw-reset.sql` for easy set-up.
 
 ## Running
 
