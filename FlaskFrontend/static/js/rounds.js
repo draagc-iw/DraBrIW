@@ -17,51 +17,25 @@ function initNewRound() {
 
 }
 
-function initAddDrink() {
-    document.querySelectorAll('.order').forEach(element =>
-        element.querySelector('.order__item-add')
-            .addEventListener('click', () => App.util.toggle_child_visibility('.order__body', element)));
+function initActiveSelector() {
+    const activeRoundsBtn = document.querySelector('#btn-rnd-active');
+    const allRoundsBtn = document.querySelector('#btn-rnd-all');
+    activeRoundsBtn.addEventListener('click', () => {
+        activeRoundsBtn.classList.add('active');
+        allRoundsBtn.classList.remove('active');
 
-    document.querySelectorAll('.to-add')
-        .forEach(element => element.addEventListener('click', (ev) => {
-            const reqBody = {
-                roundId: element.getAttribute('data-round-id'),
-                drinkId: element.getAttribute('data-drink-id'),
-                personId: element.getAttribute('data-person-id'),
-            };
+        document.querySelectorAll('.block-list-item.closed')
+            .forEach(element => element.classList.add('hidden'));
+    });
 
-            App.req.post(location.href, reqBody)
-                .then(() => location.reload())
-                .catch((err) => alert(err));
-        }));
+    allRoundsBtn.addEventListener('click', () => {
+        allRoundsBtn.classList.add('active');
+        activeRoundsBtn.classList.remove('active');
 
-}
-
-function initAddPerson() {
-    document.querySelector('.add-button').addEventListener('click', () => {
-        if (document.querySelector('.order.not-added')) return;
-
-        const content = document.querySelector('#new_order_template').content;
-        const newNode = document.importNode(content, true);
-
-        if(newNode.querySelector(".order__item-container").childElementCount < 1) {
-            alert("No more people to to add");
-            return;
-        }
-        newNode.querySelectorAll('.to-add')
-            .forEach((element) => element.addEventListener('click', () =>
-                App.req.post(location.href, {personId: element.getAttribute('data-add-id')})
-                    .then(() => location.reload())
-                    .catch((err) => alert(err))
-            ));
-
-        document.querySelector('.round-orders').appendChild(newNode);
-
-
+        document.querySelectorAll('.block-list-item.closed')
+            .forEach(element => element.classList.remove('hidden'));
     });
 }
 
+initActiveSelector();
 initNewRound();
-initAddDrink();
-initAddPerson();
-init

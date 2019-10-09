@@ -61,6 +61,7 @@ class RoundMapper(BaseMapper):
             else:
                 initiator = User(row.initiator_first_name, row.initiator_last_name,
                                  uid=row.initiator_id)
-                rounds[row.round_id] = Round(initiator, id=row.round_id)
+                rounds[row.round_id] = Round(initiator, id=row.round_id, active=(row.round_active == 1))
+
 
         return list(rounds.values()) if (len(rounds) > 1) else rounds.popitem()[1]

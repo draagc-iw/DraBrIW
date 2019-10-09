@@ -4,10 +4,11 @@ from App.Utils.terminal_utils import bold
 
 
 class Round:
-    def __init__(self, initiator: User, id: int = None):
+    def __init__(self, initiator: User, id: int = None, active=True):
         self.initiator = initiator
         self._orders = dict()
         self.id = id
+        self.active = active
 
     @property
     def uid(self):
@@ -24,7 +25,6 @@ class Round:
                 self._orders[person.uid].add_item(drink_id)
         else:
             self._orders[person.uid] = order
-
 
     def __str__(self):
         initiator_name = "No initiator" if self.initiator is None else self.initiator.full_name

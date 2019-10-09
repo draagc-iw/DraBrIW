@@ -61,9 +61,12 @@ def round_details(round_id: int):
         return render_template("app/round_details.html", round=rnd,
                                people=UserService().get_all(), drinks=DrinkService().get_all())
     elif request.method == "POST":
-        person_id = int(request.json["personId"])
-        drink_id = request.json["drinkId"] if "drinkId" in request.json else None
-        RoundService().add_person(round_id, person_id, drink_id)
+        if request.json["action"] == "close":
+            RoundService().close_round(round_id)
+        else:
+            person_id = int(request.json["personId"])
+            drink_id = request.json["drinkId"] if "drinkId" in request.json else None
+            RoundService().add_person(round_id, person_id, drink_id)
         return jsonify({"status": "ok"})
 
 

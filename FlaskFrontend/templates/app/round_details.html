@@ -1,7 +1,12 @@
 {% extends "app/base_app.html" %}
 {% block app_content %}
     <div class="details-container">
-        <div class="details__title">Round #{{ round.id }}</div>
+        <div class="details__title">
+            Round #{{ round.id }}
+            {% if not round.active %}
+                -- CLOSED
+            {% endif %}
+        </div>
         <div class="details__subtitle">
             Mastered by
             <u>{{ round.initiator.first_name | capitalize }} {{ round.initiator.last_name | capitalize }}</u></div>
@@ -48,13 +53,14 @@
             {% endfor %}
         </div>
     </div>
-    <div class="add-button main-button hover">
+    <div class="add-button main-button hover {% if not round.active %}hidden{% endif %}">
         Add
     </div>
 
-    <div class="close-round-button main-button hover">
+
+    <button class="close-round-button main-button hover {% if not round.active %}hidden{% endif %}">
         Close round
-    </div>
+    </button>
 
     <template id="new_order_template">
         <div class="order not-added hover">
@@ -76,5 +82,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="{{ url_for('static', filename='js/rounds.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/round_details.js') }}"></script>
 {% endblock %}

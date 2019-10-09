@@ -27,17 +27,18 @@ class RoundService:
         cursor.execute(add_q, (round_id, person_id, drink_id))
         self._db.commit()
 
-    def close_round(self, round: Round):
+    def close_round(self, round_id):
         close_q = """
         UPDATE rounds SET active=0
         WHERE rounds.id = ?;
         """
 
         cursor = self._db.cursor_prepared
-        cursor.execute(close_q, (round.uid,))
+        cursor.execute(close_q, (round_id,))
 
     def get_with_id(self, id: int):
         get_id_q = f"""SELECT r.id               AS round_id,
+       r.active     AS round_active,
        p.id               AS initiator_id,
        p.first_name       AS initiator_first_name,
        p.last_name        AS initiator_last_name,
@@ -65,6 +66,7 @@ WHERE r.id = {id};
     def get_all(self):
         get_all_q = """
         SELECT r.id         AS round_id,
+               r.active     AS round_active,
                p.id         AS initiator_id,
                p.first_name AS initiator_first_name,
                p.last_name  AS initiator_last_name,

@@ -36,6 +36,7 @@ a:hover {
     float: right;
     width: 100%;
     height: 100%;
+    text-align: center;
 
 }
 
@@ -149,6 +150,7 @@ a:hover {
 
 .round-orders {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 30px;
 }
 
@@ -196,7 +198,6 @@ a:hover {
 }
 
 .main-button {
-    display: inline-block;
     cursor: pointer;
     color: white;
     background: black;
@@ -279,4 +280,8 @@ label {
 
 .block-list-item:hover .edit {
     display: initial;
+}
+
+.active-round-selector{
+    margin: 20px;
 }

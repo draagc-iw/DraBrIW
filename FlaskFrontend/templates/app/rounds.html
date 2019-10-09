@@ -1,15 +1,22 @@
 {% extends "app/base_app.html" %}
 {% block app_content %}
+
     <div class="block-list-container scrollable">
+        <div class="btn-group active-round-selector" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-dark active" id="btn-rnd-active">Active</button>
+            <button type="button" class="btn btn-outline-dark" id="btn-rnd-all">All</button>
+        </div>
         <div class="block-list">
             {% for round in rounds %}
-                <div class="block-list-item" data-href="{{url_for('round_details', round_id=round.id)}}">
-
-                        {#                    <img alt="user-profile-image" class="block-list-item__img" src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">#}
-                        <div class="block-list-item__title">
-                            <strong><u>Master:</u></strong> {{ round.initiator.first_name | capitalize }} {{ round.initiator.last_name | capitalize }}
-                        </div>
-                        <div class="block-list-item__subtitle">ID: #{{ round.id }}</div>
+                {% if not round.active %}
+                    {% set extra_class='closed hidden' %}
+                {% endif %}
+                <div class="block-list-item {{extra_class}}"
+                     data-href="{{ url_for('round_details', round_id=round.id) }}">
+                    <div class="block-list-item__title">
+                        <strong><u>Master:</u></strong> {{ round.initiator.first_name | capitalize }} {{ round.initiator.last_name | capitalize }}
+                    </div>
+                    <div class="block-list-item__subtitle">ID: #{{ round.id }}</div>
                 </div>
             {% endfor %}
             <div class="block-list-item list-add">
@@ -35,5 +42,5 @@
     </div>
 {% endblock %}
 {% block scripts %}
-    <script src="{{url_for('static', filename='js/rounds.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/rounds.js') }}"></script>
 {% endblock %}
