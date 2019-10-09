@@ -81,9 +81,13 @@ WHERE r.id = {id};
                        INNER JOIN person p2 on ru.person_id = p2.id
                        INNER JOIN drinks d on ru.drinks_id = d.id)
                  AS ru_link
-             ON ru_link.round_id = r.id;
+             ON ru_link.round_id = r.id
+             ORDER BY r.id;
+             
         """
 
         cursor = self._db.cursor_named
         cursor.execute(get_all_q)
         return RoundMapper.from_db(cursor.fetchall())
+
+

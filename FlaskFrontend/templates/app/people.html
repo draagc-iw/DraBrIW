@@ -11,7 +11,9 @@
                         <div class="block-list-item__title">{{ person.first_name | capitalize }}</div>
                         <div class="block-list-item__subtitle">{{ person.last_name | capitalize }}</div>
                         {% if person.fav_drink is not none %}
-                        <div class="block-list-item__description">{{ person.fav_drink.get_name() }}</div>
+                            <div class="block-list-item__description"><i>Favourite drink: </i>   {{ person.fav_drink.get_name() }}</div>
+                        {% else %}
+                        <div class="block-list-item__description"><i>Favourite drink: </i>   Unset</div>
                         {% endif %}
                     </div>
                     <div class="block-list-item__edit hidden">

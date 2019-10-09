@@ -44,14 +44,19 @@ a:hover {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
+
+    justify-content: flex-start;
+    align-content: baseline;
+
     padding: 0;
 
 }
 
 .block-list-item {
     position: relative;
-    height: 250px;
     width: 250px;
+    height: fit-content;
+    min-height: 290px;
     padding: 25px 0;
     margin: 20px;
     background: white;
@@ -73,16 +78,19 @@ a:hover {
 .block-list-item__title {
     font-size: 1.8em;
     font-weight: 500;
-    margin-bottom: 20px;
 }
 
 .block-list-item__subtitle {
     font-size: 2em;
     font-weight: 700;
-    margin-bottom: 5px;
+}
+
+.block-list-item__description {
+    margin-top: 20px;
 }
 
 .block-list-item__img {
+    min-height: 100px;
     max-width: 35%;
     margin-bottom: 15px;
 }
@@ -145,6 +153,8 @@ a:hover {
 }
 
 .order {
+    min-width: 250px;
+
     margin: 5px 10px;
     background: white;
     border-radius: 5px;
@@ -162,7 +172,11 @@ a:hover {
     padding: 20px;
 }
 
-.drink-count {
+.drink {
+    text-align: left;
+}
+
+.drink__count {
     color: red;
     display: inline-block;
     border: 4px solid #EB5757;
@@ -171,19 +185,18 @@ a:hover {
     height: 2em;
     box-sizing: border-box;
     padding: 0px;
+    text-align: center;
 }
 
-.drink-name {
+.drink__name {
     display: inline-block;
     font-size: 2em;
     vertical-align: middle;
     margin-left: 25px;
 }
 
-.add-button {
-    position: fixed;
-    bottom: 50px;
-    right: 40px;
+.main-button {
+    display: inline-block;
     cursor: pointer;
     color: white;
     background: black;
@@ -191,6 +204,20 @@ a:hover {
     border-radius: 5px;
     font-weight: 700;
     font-size: 1.2em;
+}
+
+.add-button {
+    position: fixed;
+    bottom: 50px;
+    right: 225px;
+
+}
+
+.close-round-button {
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+
 }
 
 .hover {
@@ -220,16 +247,16 @@ a:hover {
 
 }
 
-label{
+label {
     display: block;
 }
 
-#drink-name{
+#drink-name {
     display: block;
     margin: auto;
 }
 
-.close{
+.close {
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
@@ -242,13 +269,14 @@ label{
     top: 10px;
     right: 10px;
 }
-.edit{
+
+.edit {
     display: none;
     position: absolute;
     top: 10px;
     right: 10px;
 }
 
-.block-list-item:hover .edit{
+.block-list-item:hover .edit {
     display: initial;
 }

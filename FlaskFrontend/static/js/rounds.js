@@ -64,3 +64,4 @@ function initAddPerson() {
 initNewRound();
 initAddDrink();
 initAddPerson();
+init

@@ -35,7 +35,8 @@ class UserService:
                             p.id, p.first_name AS first_name, p.last_name AS last_name, d.name AS drink_name
                         FROM person AS p
                         LEFT JOIN drinks as d
-                        ON p.id_fav_drink = d.id"""
+                        ON p.id_fav_drink = d.id
+                        ORDER BY p.id"""
 
         cursor = self._db.cursor_named
         cursor.execute(get_all_q)

@@ -16,8 +16,11 @@
                         <div class="order__item-container">
                             {% for id, count in order.items.items() %}
                                 {% if (drinks | selectattr('id', 'equalto', id) | list | length) > 0 %}
-                                    <div class="drink-count">{{ count }}</div>
-                                    <div class="drink-name">{{ (drinks | selectattr('id', 'equalto', id) | list)[0].get_name() }}</div>
+                                    <div class="drink">
+                                        <div class="drink__count">{{ count }}</div>
+                                        <div class="drink__name">{{ (drinks | selectattr('id', 'equalto', id) | list)[0].get_name() }}</div>
+                                    </div>
+
                                 {% endif %}
                             {% endfor %}
                             <div class="order__item-add">
@@ -45,8 +48,12 @@
             {% endfor %}
         </div>
     </div>
-    <div class="add-button hover">
+    <div class="add-button main-button hover">
         Add
+    </div>
+
+    <div class="close-round-button main-button hover">
+        Close round
     </div>
 
     <template id="new_order_template">
