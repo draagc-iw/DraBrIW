@@ -1,7 +1,7 @@
 {% block app_sidebar %}
     <menu class="vertical-menu">
-        <li class="vertical-menu__item"><a href="/app/people">People</a></li>
-        <li class="vertical-menu__item"><a href="/app/drinks">Drinks</a></li>
-        <li class="vertical-menu__item"><a href="/app/rounds">Rounds</a></li>
+        <li class="vertical-menu__item {% if request.endpoint == 'people' %}active{% endif %}"><a href="/app/people">People</a></li>
+        <li class="vertical-menu__item {% if request.endpoint == 'drinks' %}active{% endif %}"><a href="/app/drinks">Drinks</a></li>
+        <li class="vertical-menu__item {% if request.endpoint == 'rounds' %}active{% endif %}"><a href="/app/rounds">Rounds</a></li>
     </menu>
 {% endblock %}

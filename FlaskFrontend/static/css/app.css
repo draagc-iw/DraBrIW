@@ -117,8 +117,13 @@ a:hover {
     text-decoration: underline;
 }
 
+.vertical-menu__item.active{
+    font-weight: 700;
+}
+
 .select-item-list__item {
     margin: 10px 0px;
+    cursor: pointer;
 }
 
 .select-item-list__item:hover {
