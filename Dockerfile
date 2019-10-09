@@ -3,7 +3,7 @@ FROM tiangolo/uwsgi-nginx:python3.7
 ENV STATIC_URL /static
 ENV STATIC_PATH /app/static
 
-COPY provision/requirements.txt /app/requirements.txt
+COPY requirements.txt /app/requirements.txt
 RUN pip install -r /app/requirements.txt
 
 ENV PYTHONPATH=/app
