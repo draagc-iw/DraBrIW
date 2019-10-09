@@ -14,7 +14,7 @@ Install dependencies with
 pip install -r requirements.txt
 ```
 
-##Prerequisites
+## Prerequisites
 
 A MySQL 5.7+ database with the correct schema. An initializer SQL script is provided in `drabriw-reset.sql` for easy set-up.
 
