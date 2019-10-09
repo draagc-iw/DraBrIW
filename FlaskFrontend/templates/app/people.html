@@ -4,9 +4,31 @@
         <ul class="block-list">
             {% for person in people %}
                 <li class="block-list-item">
-                    <img class="block-list-item__img" src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
-                    <div class="block-list-item__title">{{ person.first_name | capitalize }}</div>
-                    <div class="block-list-item__subtitle">{{ person.last_name | capitalize }}</div>
+                    <div class="block-list-item__info">
+                        <div class="edit">Edit</div>
+                        <img class="block-list-item__img"
+                             src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
+                        <div class="block-list-item__title">{{ person.first_name | capitalize }}</div>
+                        <div class="block-list-item__subtitle">{{ person.last_name | capitalize }}</div>
+                        {% if person.fav_drink is not none %}
+                        <div class="block-list-item__description">{{ person.fav_drink.get_name() }}</div>
+                        {% endif %}
+                    </div>
+                    <div class="block-list-item__edit hidden">
+                        <div class="select-item-list scrollable">
+                            <div class="close">x</div>
+                            <div class="block-list-item__title">Select favourite drink</div>
+                            {% for drink in drinks %}
+                                <div class="select-item-list__item to-add"
+                                     data-drink-id="{{ drink.id }}" data-person-id="{{ person.uid }}">
+                                    <img alt="drink image" src="{{ url_for('static', filename='img/coffee.svg') }}">
+                                    <div>{{ drink.get_name() }}</div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+
                 </li>
             {% endfor %}
             <li class="to-add">
@@ -34,5 +56,5 @@
     </div>
 {% endblock %}
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/people.js') }} "></script>
+    <script src="{{ url_for('static', filename='js/people.js') }} "></script>
 {% endblock %}

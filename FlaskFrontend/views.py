@@ -17,13 +17,22 @@ def base_app():
 @app.route('/app/people', methods=["GET", "POST"])
 def people():
     if request.method == "GET":
-        return render_template("app/people.html", people=UserService().get_all())
+        return render_template("app/people.html", people=UserService().get_all(), drinks=DrinkService().get_all())
     elif request.method == "POST":
         first_name = request.json["personFirstName"]
         last_name = request.json["personLastName"]
         new_user = User(first_name, last_name)
         UserService().add(new_user)
         return jsonify({"status": "ok"})
+
+
+@app.route('/app/people/<int:person_id>', methods=["POST"])
+def person_edit(person_id: int):
+    if request.method == "POST":
+        drink_id = request.json["drinkId"]
+        UserService().change_drink(person_id, drink_id)
+        return jsonify({"status": "ok"})
+
 
 @app.route('/app/drinks', methods=["GET", "POST"])
 def drinks():
