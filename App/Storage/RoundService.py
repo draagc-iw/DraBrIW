@@ -61,6 +61,7 @@ WHERE r.id = {id};
         cursor = self._db.cursor_named
         cursor.execute(get_id_q)
         res = RoundMapper.from_db(cursor.fetchall())
+        # print(res[0].orders)
         return res[0] if len(res) > 0 else None
 
     def get_all(self):
