@@ -7,4 +7,5 @@ docker build -t "${user}"/"${app}" .
 docker run -d -p 8088:80 \
   --name=${app} \
   --env DB_PASS="$(security find-generic-password -s academy_db_pass -w)" "${user}"/"${app}"
+
 #  -v "$PWD":/app \

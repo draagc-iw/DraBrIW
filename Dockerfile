@@ -9,7 +9,7 @@ RUN pip install -r /app/requirements.txt
 ENV PYTHONPATH=/app
 
 COPY FlaskFrontend /app/FlaskFrontend
-COPY DraBrIW /app/DraBrIW
+COPY App /app/App
 
 COPY uwsgi.ini /app
 
