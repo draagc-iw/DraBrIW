@@ -1,4 +1,4 @@
-from DraBrIW.App.Brews import Brew
+from App.Brews import Brew
 
 
 class User:

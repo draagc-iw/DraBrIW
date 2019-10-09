@@ -1,7 +1,7 @@
 import abc
-from DraBrIW.App.User import User
-from DraBrIW.App.Brews import Drink
-from DraBrIW.App.Orders import Round, RoundOrder
+from App.User import User
+from App.Brews import Drink
+from App.Orders import Round, RoundOrder
 
 
 class BaseMapper(metaclass=abc.ABCMeta):

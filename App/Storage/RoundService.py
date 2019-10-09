@@ -1,9 +1,8 @@
-from DraBrIW.App.Storage import DBConnectionManager
-from DraBrIW.App.User import User
-from DraBrIW.App.Orders import Round
-from DraBrIW.App.Brews import Drink
+from App.Storage import DBConnectionManager
+from App.User import User
+from App.Orders import Round
 
-from DraBrIW.App.Utils.Mappers import RoundMapper
+from App.Utils.Mappers import RoundMapper
 
 
 class RoundService:

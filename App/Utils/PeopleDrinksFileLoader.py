@@ -1,8 +1,8 @@
 import os
 
-from DraBrIW.App.User import User
-from DraBrIW.App.Brews import CustomDrink
-from DraBrIW.App.Storage import UserDatabase
+from App.User import User
+from App import CustomDrink
+from App.Storage import UserDatabase
 
 
 class BufferedUserDatabase(UserDatabase):

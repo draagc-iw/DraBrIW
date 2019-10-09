@@ -1,9 +1,9 @@
 import unittest
 
-from DraBrIW.App.Orders import Round, RoundOrder
-from DraBrIW.App.User import User
+from App import Round, RoundOrder
+from App.User import User
 
-from DraBrIW.App.Brews import Americano, Espresso, DoubleEspresso
+from App import Americano, Espresso, DoubleEspresso
 
 
 class TestUser(User):

@@ -1,6 +1,6 @@
-from flask import Flask, render_template, escape, url_for, redirect, request, jsonify
-from DraBrIW.App.Storage import UserService, DrinkService, RoundService
-from DraBrIW.App.User import User
+from flask import render_template, escape, url_for, redirect, request, jsonify
+from App.Storage import UserService, DrinkService, RoundService
+from App.User import User
 from FlaskFrontend import app
 
 

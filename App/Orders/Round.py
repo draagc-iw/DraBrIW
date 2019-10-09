@@ -1,6 +1,6 @@
 from ..User import User
-from DraBrIW.App.Orders import Order
-from DraBrIW.App.Utils.terminal_utils import bold
+from App.Orders import Order
+from App.Utils.terminal_utils import bold
 
 
 class Round:

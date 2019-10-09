@@ -1,7 +1,6 @@
-from DraBrIW.App.Utils import SingletonMeta
-from DraBrIW.App.Storage import DBConnectionManager
-from DraBrIW.App.Brews import Drink
-from DraBrIW.App.Utils import DrinkMapper
+from App.Utils import SingletonMeta
+from App.Storage import DBConnectionManager
+from App.Utils.Mappers import DrinkMapper
 
 
 class DrinkService(metaclass=SingletonMeta):

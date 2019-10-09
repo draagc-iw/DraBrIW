@@ -1,8 +1,8 @@
 import mysql
 import os, sys
 from mysql.connector import errorcode
-import DraBrIW.App.Utils as Utils
-from DraBrIW.App.Storage.db_utils import get_db_pass_from_keychain
+import App.Utils as Utils
+from App.Storage.db_utils import get_db_pass_from_keychain
 
 SQL_connection_config = {
     'host': 'database-academy-test.crtvvzmhs8i6.eu-west-2.rds.amazonaws.com',

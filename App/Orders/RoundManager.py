@@ -1,4 +1,4 @@
-from DraBrIW.App.Orders import Round, OrderManager
+from App import Round, OrderManager
 
 class RoundManager:
     def __init__(self, drinks, extras):
