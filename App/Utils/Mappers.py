@@ -51,16 +51,16 @@ class RoundMapper(BaseMapper):
     def from_db(db_response: iter):
         rounds = dict()
         for row in db_response:
-            drink = Drink(row.drink_name, 0, id=row.drink_id)
             user = User(row.person_first_name, row.person_last_name, uid=row.person_id)
             order = RoundOrder()
-            order.add_item(drink.id)
+            order.add_item(row.drink_id)
 
-            if row.round_id in rounds.keys():
-                rounds[row.round_id].add(user, order)
-            else:
+            if row.round_id not in rounds.keys():
                 initiator = User(row.initiator_first_name, row.initiator_last_name,
                                  uid=row.initiator_id)
                 rounds[row.round_id] = Round(initiator, id=row.round_id, active=(row.round_active == 1))
+
+            if user.first_name is not None:
+                rounds[row.round_id].add(user, order)
 
         return list(rounds.values())
