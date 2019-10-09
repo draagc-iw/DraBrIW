@@ -1,8 +1,8 @@
 import unittest
 
-from ZDraBrIW.App.Storage import UserService
-from ZDraBrIW.App.User import User
-from ZDraBrIW.App.Brews import Americano, Espresso
+from DraBrIW.App.Storage import UserService
+from DraBrIW.App.User import User
+from DraBrIW.App.Brews import Americano, Espresso
 
 
 class TestUserService(unittest.TestCase):

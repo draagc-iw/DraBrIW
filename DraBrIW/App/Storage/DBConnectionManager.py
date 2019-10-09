@@ -1,15 +1,25 @@
 import mysql
+import os, sys
 from mysql.connector import errorcode
-import ZDraBrIW.App.Utils as Utils
-from ZDraBrIW.App.Storage.db_utils import get_db_pass_from_keychain
+import DraBrIW.App.Utils as Utils
+from DraBrIW.App.Storage.db_utils import get_db_pass_from_keychain
 
 SQL_connection_config = {
     'host': 'database-academy-test.crtvvzmhs8i6.eu-west-2.rds.amazonaws.com',
     'user': 'dragos',
-    'database': 'dragos',
-    'password': get_db_pass_from_keychain()
+    'database': 'dragos'
 }
 
+try:
+    password = get_db_pass_from_keychain()
+except FileNotFoundError:
+    try:
+        password = os.environ["DB_PASS"]
+    except KeyError:
+        print("Cannot find password for db. Exiting")
+        sys.exit(1)
+
+SQL_connection_config['password'] = password.strip("\n ")
 
 class DBConnectionManager(metaclass=Utils.SingletonMeta):
     def __init__(self):

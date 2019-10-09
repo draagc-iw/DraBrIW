@@ -1,6 +1,6 @@
 import unittest
 
-from ZDraBrIW.TerminalFrontend.Menu import Menu, MenuItem, MenuManager
+from DraBrIW.TerminalFrontend.Menu import Menu, MenuItem, MenuManager
 
 
 class TestMenuItem(unittest.TestCase):

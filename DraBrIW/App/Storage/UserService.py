@@ -1,7 +1,7 @@
-from ZDraBrIW.App.Storage import DBConnectionManager
-from ZDraBrIW.App.User import User
-from ZDraBrIW.App.Brews import Brew
-from ZDraBrIW.App.Utils import UserMapper
+from DraBrIW.App.Storage import DBConnectionManager
+from DraBrIW.App.User import User
+from DraBrIW.App.Brews import Brew
+from DraBrIW.App.Utils import UserMapper
 
 
 class UserService:

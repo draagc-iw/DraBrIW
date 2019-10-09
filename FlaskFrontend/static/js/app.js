@@ -1,33 +1,38 @@
-function initAdders() {
-    const elAdd = document.querySelector('.list-add');
-    if (elAdd) {
-        elAdd.addEventListener('click', () => {
-            const elVisible = document.querySelector('.list-add>div:not(.hidden)');
-            const elHidden = elAdd.querySelector('.list-add>div.hidden');
-            elVisible.classList.add('hidden');
-            elHidden.classList.remove('hidden');
-        });
+function get(url) {
+    return new Promise((resolve, reject) => {
+        var req = new XMLHttpRequest();
+        req.open('GET', url);
 
-        elAdd.querySelectorAll('.to-add').forEach((element) => {
-                element.addEventListener('click', (ev) => {
-                    const apiPath = ev.target.parentElement.getAttribute('data-path');
-                    const addId = ev.target.parentElement.getAttribute('data-add-id');
+        req.onload = (ev) => {
+            if (req.status == 200) resolve(req.response); // Resolve with response if OK
+            else reject(Error(req.statusText)); // Reject with statusText if not
+        };
+        req.onerror = () => reject(Error("Network Error"));
+        req.send();
+    });
+}
 
-                    const req = new XMLHttpRequest();
-                    req.addEventListener('load', () => {
-                        if (req.status === 200) location.reload();
-                        else alert(`Error ${req.statusText}`);
+function post(url, body) {
+    return new Promise((resolve, reject) => {
+        const req = new XMLHttpRequest();
+        req.onload = (ev) => {
+            if (req.status == 200 || req.status == 201) resolve(req.response); // Resolve with response if OK
+            else reject(Error(req.statusText)); // Reject with statusText if not
+        };
+        req.onerror = () => reject(Error("Network Error"));
+        req.open("POST", url);
+        req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        req.send(JSON.stringify(body));
+    });
 
-                    });
-                    req.addEventListener('error', (err) => alert(`Error: ${err}`));
-                    req.open("POST", apiPath);
-                    req.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-                    req.send(JSON.stringify({id: addId}));
-                });
-            }
-        );
-    }
+}
 
+function toggle_child_visibility(elementSelector, parentElement) {
+    const base = parentElement ? parentElement : document;
+    const elVisible = base.querySelector(`${elementSelector}>div:not(.hidden)`);
+    const elHidden = base.querySelector(`${elementSelector}>div.hidden`);
+    if(elVisible) elVisible.classList.add('hidden');
+    if(elHidden) elHidden.classList.remove('hidden');
 }
 
 function initBlockLinks() {
@@ -39,9 +44,12 @@ function initBlockLinks() {
     });
 }
 
+
 function init() {
-    initAdders();
     initBlockLinks();
 }
 
 init();
+window.App = {};
+window.App.req = {get, post};
+window.App.util = {toggle_child_visibility};

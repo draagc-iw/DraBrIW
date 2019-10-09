@@ -1,6 +1,6 @@
-import ZDraBrIW.App.Brews
+import DraBrIW.App.Brews
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from ZDraBrIW.Server.RequestHandler import RequestHandler
+from DraBrIW.Server.RequestHandler import RequestHandler
 
 def main():
     http_server = HTTPServer(("", 8080), RequestHandler)

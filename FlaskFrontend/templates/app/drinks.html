@@ -8,6 +8,25 @@
                     <div class="block-list-item__title">{{ drink.get_name() | capitalize }}</div>
                 </li>
             {% endfor %}
+
+            <li class="to-add">
+                <div class="block-list-item hidden">
+                    <div class="block-list-item__title">New drink</div>
+                    <form id="form-drink">
+                        <label for="drink-name">
+                            Drink name
+                            <input type="text" name="drink-name" id="drink-name">
+                        </label>
+                        <button class="bttn-submit" type="submit">Submit</button>
+                    </form>
+                </div>
+            </li>
         </ul>
     </div>
+    <div class="add-button hover">
+        Add
+    </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/drinks.js') }}"></script>
 {% endblock %}

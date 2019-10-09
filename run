@@ -1,6 +1,10 @@
 #!/bin/bash
-PROJECT_LOCATION="/Users/dra/PycharmProjects/DraBrIW"
-
-source $PROJECT_LOCATION/venv/bin/activate
-cd $PROJECT_LOCATION
-python3 -m DraBrIW | lolcat -a -d 1 -t
+user="draagc"
+app="drabriw"
+docker stop ${app}
+docker rm ${app}
+docker build -t "${user}"/"${app}" .
+docker run -d -p 8088:80 \
+  --name=${app} \
+  --env DB_PASS="$(security find-generic-password -s academy_db_pass -w)" "${user}"/"${app}"
+#  -v "$PWD":/app \

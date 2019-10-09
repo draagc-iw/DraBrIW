@@ -1,5 +1,5 @@
 from .jsonders import UserEncoder, UserDecoder, DrinkDecoder
-from ZDraBrIW.App.Storage import DrinkService, UserService
+from DraBrIW.App.Storage import DrinkService, UserService
 import json
 
 us = UserService()

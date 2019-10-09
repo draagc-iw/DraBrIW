@@ -1,18 +1,18 @@
-from ZDraBrIW.App.Utils import SingletonMeta
-from ZDraBrIW.App.Storage import DBConnectionManager
-from ZDraBrIW.App.Brews import Drink
-from ZDraBrIW.App.Utils import DrinkMapper
+from DraBrIW.App.Utils import SingletonMeta
+from DraBrIW.App.Storage import DBConnectionManager
+from DraBrIW.App.Brews import Drink
+from DraBrIW.App.Utils import DrinkMapper
 
 
 class DrinkService(metaclass=SingletonMeta):
     def __init__(self):
         self._db = DBConnectionManager()
 
-    def add(self, drink: Drink):
+    def add(self, drink_name):
         add_query = f"""INSERT INTO drinks (name) 
                        VALUES (%s);"""
         cursor = self._db.cursor_prepared
-        cursor.execute(add_query, (DrinkMapper.to_db(drink),))
+        cursor.execute(add_query, (drink_name,))
 
 
     def get(self, uid: int):

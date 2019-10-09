@@ -1,9 +1,9 @@
-from ZDraBrIW.App.Storage import DBConnectionManager
-from ZDraBrIW.App.User import User
-from ZDraBrIW.App.Orders import Round
-from ZDraBrIW.App.Brews import Drink
+from DraBrIW.App.Storage import DBConnectionManager
+from DraBrIW.App.User import User
+from DraBrIW.App.Orders import Round
+from DraBrIW.App.Brews import Drink
 
-from ZDraBrIW.App.Utils.Mappers import RoundMapper
+from DraBrIW.App.Utils.Mappers import RoundMapper
 
 
 class RoundService:
@@ -38,31 +38,29 @@ class RoundService:
         cursor.execute(close_q, (round.uid,))
 
     def get_with_id(self, id: int):
-        get_id_q = f"""
-        SELECT r.id         AS round_id,
-               p.id         AS initiator_id,
-               p.first_name AS initiator_first_name,
-               p.last_name  AS initiator_last_name,
-               ru_link.person_id AS person_id,
-               ru_link.first_name AS person_first_name,
-               ru_link.last_name AS person_last_name,
-               ru_link.drink_name AS drink_name,
-               ru_link.drink_id AS drink_id
-        FROM rounds r
-                 INNER JOIN person p ON r.initiator_id = p.id
-                 LEFT JOIN
-             (SELECT ru.round_id, p2.first_name, p2.last_name, p2.id AS person_id, d.name AS drink_name, d.id AS drink_id
-              FROM rounds_users AS ru
-                       INNER JOIN person p2 on ru.person_id = p2.id
-                       INNER JOIN drinks d on ru.drinks_id = d.id)
-                 AS ru_link
-             ON ru_link.round_id = r.id
-         WHERE r.id = {id};
+        get_id_q = f"""SELECT r.id               AS round_id,
+       p.id               AS initiator_id,
+       p.first_name       AS initiator_first_name,
+       p.last_name        AS initiator_last_name,
+       ru_link.person_id  AS person_id,
+       ru_link.first_name AS person_first_name,
+       ru_link.last_name  AS person_last_name,
+       ru_link.drink_name AS drink_name,
+       ru_link.drink_id   AS drink_id
+FROM rounds r
+         INNER JOIN person p ON r.initiator_id = p.id
+         LEFT JOIN
+     (SELECT ru.round_id, p2.first_name, p2.last_name, p2.id AS person_id, d.name AS drink_name, d.id AS drink_id
+      FROM rounds_users AS ru
+               LEFT JOIN person p2 on ru.person_id = p2.id
+               LEFT JOIN drinks d on ru.drinks_id = d.id)
+         AS ru_link
+     ON ru_link.round_id = r.id
+WHERE r.id = {id};
         """
         cursor = self._db.cursor_named
         cursor.execute(get_id_q)
         res = cursor.fetchall()
-        print(res)
         return RoundMapper.from_db(res)
 
     def get_all(self):

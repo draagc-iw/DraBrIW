@@ -5,10 +5,34 @@
             {% for person in people %}
                 <li class="block-list-item">
                     <img class="block-list-item__img" src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
-                    <div class="block-list-item__title">{{ person.first_name | capitalize}}</div>
-                    <div class="block-list-item__subtitle">{{ person.last_name | capitalize}}</div>
+                    <div class="block-list-item__title">{{ person.first_name | capitalize }}</div>
+                    <div class="block-list-item__subtitle">{{ person.last_name | capitalize }}</div>
                 </li>
             {% endfor %}
+            <li class="to-add">
+                <div class="block-list-item hidden">
+                    <div class="block-list-item__title">New person</div>
+                    <form id="form-person">
+                        <label for="person-first-name">
+                            First name
+                        </label>
+                        <input type="text" id="person-first-name">
+                        <label for="person-last-name">
+                            Last name
+                        </label>
+                        <input type="text" id="person-last-name">
+
+                        <button class="bttn-submit" type="submit">Submit</button>
+                    </form>
+                </div>
+            </li>
         </ul>
     </div>
+
+    <div class="add-button hover">
+        Add
+    </div>
+{% endblock %}
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/people.js') }} "></script>
 {% endblock %}

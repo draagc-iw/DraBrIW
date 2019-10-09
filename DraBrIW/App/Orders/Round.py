@@ -1,6 +1,6 @@
 from ..User import User
-from ZDraBrIW.App.Orders import Order
-from ZDraBrIW.App.Utils.terminal_utils import bold
+from DraBrIW.App.Orders import Order
+from DraBrIW.App.Utils.terminal_utils import bold
 
 
 class Round:
@@ -24,7 +24,6 @@ class Round:
                 self._orders[person.uid].add_item(drink_id)
         else:
             self._orders[person.uid] = order
-        print(self._orders)
 
 
     def __str__(self):

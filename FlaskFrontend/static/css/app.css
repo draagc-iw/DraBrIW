@@ -1,126 +1,229 @@
 @media only screen and (max-width: 800px) {
-  body {
-    font-size: 0.5em;
-  }
+    body {
+        font-size: 0.5em;
+    }
 }
 
-a{
-  color: inherit;
+a {
+    color: inherit;
 }
 
-a:hover{
-  color: inherit;
+a:hover {
+    color: inherit;
 }
 
-.hidden{
-  display: none;
+.hidden {
+    display: none;
 }
 
 .app-content {
-  width: 80%;
-  height: 100%;
-  float: right;
-  background: #F6F6F6;
+    width: 80%;
+    height: 100%;
+    float: right;
+    background: #F6F6F6;
 
 }
 
 .sidebar {
-  display: inline-block;
-  height: 100%;
-  width: 20%;
-  color: white;
+    display: inline-block;
+    height: 100%;
+    width: 20%;
+    color: white;
 }
 
 .block-list-container {
-  display: inline-block;
-  float: right;
-  width: 100%;
-  height: 100%;
+    display: inline-block;
+    float: right;
+    width: 100%;
+    height: 100%;
 
 }
 
 .block-list {
-  height: 100%;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  padding: 0;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
 
 }
 
 .block-list-item {
-  height: auto;
-  max-height: 280px;
-  padding: 25px 0;
-  margin: 20px;
-  background: white;
-  color: #333435;
-  text-align: center;
+    height: 250px;
+    width: 250px;
+    padding: 25px 0;
+    margin: 20px;
+    background: white;
+    color: #333435;
+    text-align: center;
 
-  flex-basis: 20%;
-  cursor: pointer;
+    flex-basis: 20%;
+    cursor: pointer;
 
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  border-radius: 5px;
-  transition: box-shadow 0.3s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease-in-out;
 }
 
-.block-list-item:hover{
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+.block-list-item:hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
 .block-list-item__title {
-  font-size: 1.8em;
-  font-weight: 500;
-  margin-bottom: 20px;
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .block-list-item__subtitle {
-  font-size: 2em;
-  font-weight: 700;
-  margin-bottom: 5px;
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 5px;
 }
 
 .block-list-item__img {
-  max-width: 35%;
-  margin-bottom: 15px;
+    max-width: 35%;
+    margin-bottom: 15px;
 }
 
 .h-100 {
-  height: 100%;
-  padding: 0;
-  margin: 0;
+    height: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-.vertical-menu{
-  list-style: none;
-  text-align: center;
-  padding: 0;
+.vertical-menu {
+    list-style: none;
+    text-align: center;
+    padding: 0;
 }
 
-.vertical-menu__item{
-  font-size: 2em;
-  cursor: pointer;
+.vertical-menu__item {
+    font-size: 2em;
+    cursor: pointer;
 }
 
-.vertical-menu__item:hover{
-  text-decoration: underline;
+.vertical-menu__item:hover {
+    text-decoration: underline;
 }
 
-.select-user-list__item{
-  margin: 10px 0px;
+.select-item-list__item {
+    margin: 10px 0px;
 }
 
-.select-user-list__item:hover{
-  background: whitesmoke;
-  color:black;
-  fill:black;
+.select-item-list__item:hover {
+    background: whitesmoke;
+    color: black;
+    fill: black;
 }
 
-.select-user-list__item img{
-  width: 10px;
+.select-item-list__item img {
+    width: 10px;
 }
 
-.select-user-list__item *{
-  display: inline-block;
+.select-item-list__item * {
+    display: inline-block;
+}
+
+.details-container {
+    text-align: center;
+}
+
+.details__title {
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.details__subtitle {
+    font-size: 1.2em;
+}
+
+.round-orders {
+    display: flex;
+    margin-top: 30px;
+}
+
+.order {
+    margin: 5px 10px;
+    background: white;
+    border-radius: 5px;
+}
+
+.order__title {
+    color: white;
+    background: black;
+    padding: 20px;
+    border-radius: 5px;
+
+}
+
+.order__item-container {
+    padding: 20px;
+}
+
+.drink-count {
+    color: red;
+    display: inline-block;
+    border: 4px solid #EB5757;
+    border-radius: 50%;
+    width: 2em;
+    height: 2em;
+    box-sizing: border-box;
+    padding: 0px;
+}
+
+.drink-name {
+    display: inline-block;
+    font-size: 2em;
+    vertical-align: middle;
+    margin-left: 25px;
+}
+
+.add-button {
+    position: fixed;
+    bottom: 50px;
+    right: 40px;
+    cursor: pointer;
+    color: white;
+    background: black;
+    padding: 5px 20px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.hover {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.order__item-add {
+    font-size: 2em;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.img-add {
+    width: 30px;
+}
+
+.bttn-submit {
+    width: 50%;
+    cursor: pointer;
+    color: white;
+    background: black;
+    padding: 5px 0px;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 1.2em;
+    margin: auto;
+
+}
+
+label{
+    display: block;
+}
+
+#drink-name{
+    display: block;
+    margin: auto;
 }

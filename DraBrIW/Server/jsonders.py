@@ -1,6 +1,6 @@
 import json
-from ZDraBrIW.App.User import User
-from ZDraBrIW.App.Brews import Drink
+from DraBrIW.App.User import User
+from DraBrIW.App.Brews import Drink
 
 
 def remove_underscore_prefix(obj_dict: dict):

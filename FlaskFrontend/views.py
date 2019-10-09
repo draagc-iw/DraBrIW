@@ -1,6 +1,8 @@
 from flask import Flask, render_template, escape, url_for, redirect, request, jsonify
 from DraBrIW.App.Storage import UserService, DrinkService, RoundService
+from DraBrIW.App.User import User
 from FlaskFrontend import app
+
 
 @app.route('/')
 def index():
@@ -8,18 +10,29 @@ def index():
 
 
 @app.route('/app')
-def app():
+def base_app():
     return redirect(url_for('people'))
 
 
-@app.route('/app/people')
+@app.route('/app/people', methods=["GET", "POST"])
 def people():
-    return render_template("app/people.html", people=UserService().get_all())
+    if request.method == "GET":
+        return render_template("app/people.html", people=UserService().get_all())
+    elif request.method == "POST":
+        first_name = request.json["personFirstName"]
+        last_name = request.json["personLastName"]
+        new_user = User(first_name, last_name)
+        UserService().add(new_user)
+        return jsonify({"status": "ok"})
 
-
-@app.route('/app/drinks')
+@app.route('/app/drinks', methods=["GET", "POST"])
 def drinks():
-    return render_template("app/drinks.html", drinks=DrinkService().get_all())
+    if request.method == "GET":
+        return render_template("app/drinks.html", drinks=DrinkService().get_all())
+    elif request.method == "POST":
+        drink_name = request.json["drinkName"]
+        DrinkService().add(drink_name)
+        return jsonify({"status": "ok"})
 
 
 @app.route('/app/rounds', methods=["GET", "POST"])
@@ -35,11 +48,12 @@ def rounds():
 @app.route('/app/rounds/<int:round_id>', methods=["GET", "POST"])
 def round_details(round_id: int):
     if request.method == "GET":
-        return render_template("app/round_details.html", round=RoundService().get_with_id(round_id),
-                               people_service=UserService(), drinks_service=DrinkService())
+        rnd = RoundService().get_with_id(round_id)
+        return render_template("app/round_details.html", round=rnd,
+                               people=UserService().get_all(), drinks=DrinkService().get_all())
     elif request.method == "POST":
         person_id = int(request.json["personId"])
-        drink_id = int(request.json["drinkId"])
+        drink_id = request.json["drinkId"] if "drinkId" in request.json else None
         RoundService().add_person(round_id, person_id, drink_id)
         return jsonify({"status": "ok"})
 
@@ -47,6 +61,11 @@ def round_details(round_id: int):
 @app.route('/user/<id>')
 def get_user(id: int):
     return f"User {escape(id)}"
+
+
+@app.template_test("not in")
+def not_in(item, iterable):
+    return item not in iterable
 
 
 if app.env == "development":

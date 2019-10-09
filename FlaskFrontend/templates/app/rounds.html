@@ -3,7 +3,7 @@
     <div class="block-list-container scrollable">
         <div class="block-list">
             {% for round in rounds %}
-                <div class="block-list-item" data-href="{{url_for('round_id', id=round.id)}}">
+                <div class="block-list-item" data-href="{{url_for('round_details', round_id=round.id)}}">
 
                         {#                    <img alt="user-profile-image" class="block-list-item__img" src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">#}
                         <div class="block-list-item__title">
@@ -14,14 +14,14 @@
             {% endfor %}
             <div class="block-list-item list-add">
                 <div>
-                    <img class="block-list-item__img" style="width: 30px;"
+                    <img class="block-list-item__img img-add"
                          src="{{ url_for('static', filename='img/add.svg') }}">
                     <div class="block-list-item__title">Create round</div>
                 </div>
 
                 <div class="select-user-list scrollable hidden">
                     {% for person in people %}
-                        <div class="select-user-list__item to-add" data-path="/app/rounds"
+                        <div class="select-item-list__item to-add" data-path="/app/rounds"
                              data-add-id="{{ person.uid }}">
                             <img src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
                             <div>{{ person.first_name | capitalize }} {{ person.last_name | capitalize }}</div>
@@ -33,4 +33,7 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script src="{{url_for('static', filename='js/rounds.js')}}"></script>
 {% endblock %}

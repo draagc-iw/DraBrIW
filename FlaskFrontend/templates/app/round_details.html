@@ -1,4 +1,73 @@
 {% extends "app/base_app.html" %}
 {% block app_content %}
+    <div class="details-container">
+        <div class="details__title">Round #{{ round.id }}</div>
+        <div class="details__subtitle">
+            Mastered by
+            <u>{{ round.initiator.first_name | capitalize }} {{ round.initiator.last_name | capitalize }}</u></div>
+        <div class="round-orders">
+            {% for (person_id, order) in round.orders.items() %}
+                <div class="order hover">
+                    <div class="order__title">
+                        {{ (people | selectattr('uid', 'equalto', person_id) | list)[0].first_name | capitalize }}
+                        {{ (people | selectattr('uid','equalto', person_id) | list)[0].last_name | capitalize }}
+                    </div>
+                    <div class="order__body">
+                        <div class="order__item-container">
+                            {% for id, count in order.items.items() %}
+                                {% if (drinks | selectattr('id', 'equalto', id) | list | length) > 0 %}
+                                    <div class="drink-count">{{ count }}</div>
+                                    <div class="drink-name">{{ (drinks | selectattr('id', 'equalto', id) | list)[0].get_name() }}</div>
+                                {% endif %}
+                            {% endfor %}
+                            <div class="order__item-add">
+                                +
+                            </div>
+                        </div>
 
+                        {#       Add drink selector              #}
+                        <div class="select-item-list scrollable hidden">
+                            <div class="block-list-item__title">Select drink</div>
+                            <div class="close">x</div>
+                            {% for drink in drinks %}
+                                <div class="select-item-list__item to-add"
+                                     data-drink-id="{{ drink.id }}" data-person-id="{{ person_id }}">
+                                    <img alt="drink image" src="{{ url_for('static', filename='img/coffee.svg') }}">
+                                    <div>{{ drink.get_name() }}</div>
+                                </div>
+                            {% endfor %}
+
+                        </div>
+
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="add-button hover">
+        Add
+    </div>
+
+    <template id="new_order_template">
+        <div class="order not-added hover">
+            <div class="order__title">
+                Select person
+            </div>
+            <div class="order__item-container">
+                {% for person in (people | selectattr('uid', 'not in', round.orders.keys())) %}
+                    <div class="select-item-list__item to-add"
+                         data-add-id="{{ person.uid }}">
+                        <img src="{{ url_for('static', filename='img/user-noimg-icon.svg') }}">
+                        <div>{{ person.first_name | capitalize }} {{ person.last_name | capitalize }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </template>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/rounds.js') }}"></script>
 {% endblock %}
