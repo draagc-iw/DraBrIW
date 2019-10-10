@@ -290,3 +290,20 @@ label {
 .active-round-selector{
     margin: 20px;
 }
+
+.closed{
+    opacity: 0.6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.closed .block-list-item__subtitle::after{
+    content: 'closed';
+    display: block;
+    position: absolute;
+    bottom: 10px;
+    font-weight: normal;
+    font-size: 0.5em;
+    font-style: italic;
+    width: 100%;
+    text-align: center;
+}
